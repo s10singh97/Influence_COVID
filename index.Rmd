@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "Influence of COVID19 on the behavioral patterns of people"
+author: "Shashwat Singh, Mehrab Singh Gill, Siddhant Mahurkar"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
