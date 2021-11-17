@@ -2,6 +2,11 @@ introduction
 data-sources
 data-transformation
 missing-values
+missing-value-analysis-for-cdc-covid-19-vaccination-dataset
+missing-value-pattern-plot
+cleveland-plot
+raster-missing-plot
+bar-plot-for-number-of-missing-values-by-date-column
 results
 interactive-component
 conclusion

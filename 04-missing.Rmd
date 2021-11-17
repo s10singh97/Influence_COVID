@@ -1,1 +1,72 @@
 # Missing values
+
+```{r, include = FALSE, echo = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE)
+```
+
+
+## Missing Value Analysis for CDC COVID-19 Vaccination Dataset
+
+### Missing Value Pattern Plot
+
+```{r, fig.height = 15}
+
+library(tidyverse)
+source('resources/plot_missing.R')
+
+data <- read.csv("resources/data/vaccine.csv")
+data[data == 0] = NA
+col <- c(1:30)
+col <- col[-c(2,4,9,13,21,25)]
+
+plot_missing(data[, col], percent = TRUE)
+
+```
+
+The vaccine dataset consists of 56 unique missing patterns. The most common pattern is when there is missing values in first column which consists of around 90 percent of all the rows. Also, the dataset consist of some very less number of rows which do not have any missing values in them. Further, the last two columns do not contain any missing values in them.
+
+### Cleveland Plot
+
+```{r}
+ddf <- data[, col] %>%
+  mutate(dis = Distributed_Janssen + Distributed_Moderna + Distributed_Pfizer) %>% 
+  select(Location, dis, Date) %>%
+  gather(key, value, -Location, -dis) %>%
+  mutate(missing = ifelse(is.na(dis), "Yes", "No")) %>% 
+  mutate(value = as.Date(value, format = '%m/%d/%Y'))
+
+de <- ddf %>% 
+  mutate(num_m = ifelse(missing == 'Yes', 1, 0)) %>% 
+  group_by(Location) %>%
+  summarise(count = sum(num_m)) %>% 
+  arrange(desc(count))
+
+ggplot(de[1:10, ], aes(x = count, y = reorder(Location, count))) + geom_point() + labs(x = 'Number of Missing Value', y = "Location", title = "Top 10 Missing Count for Vaccines Distributed VS Location")
+
+```
+
+This Cleveland Plot indicates the number of missing values as per the `Distributed` column of each `Location`. Further, only top 10 `Location`'s are selected because there was no significance missing value count for other locations. Since, this column had the maximum number of missing values, it is important to analyze this column before we can finally deducing any conclusions. As indicated by the graph, MH (Marshall Islands) has the highest number of missing values in the `Distributed` column.
+
+### Raster Missing Plot
+
+```{r, fig.height = 15}
+
+ggplot(ddf, aes(x = value, y = factor(Location))) + geom_tile(fill = ifelse(ddf$missing == 'Yes', 'red', 'grey60'), color = 'white', alpha = 0.5) + labs(x = "Date", y = "Location", title = "Missing Pattern by Location")
+
+```
+
+The above plot indicates that there is considerable number of missing value for `Distributed` vaccines from Nov 2020 to March 2021 for each location. It is quite surprising that there was not data on vaccines distributed between this time frame. One of the reasons might be some regulations wherein different states were not sharing the information on the number of vaccines distributed to the hospitals. 
+
+### Bar plot for number of missing values by Date column
+
+```{r, fig.height = 15}
+dr <- ddf %>% 
+  mutate(num_m = ifelse(missing == 'Yes', 1, 0)) %>% 
+  group_by(value) %>%
+  summarise(count = sum(num_m)) %>% 
+  arrange(desc(count))
+
+ggplot(dr[1:100, ], aes(x = count, y = reorder(value, count))) + geom_col(color = "blue", fill = "lightblue") + labs(x = 'Number of Missing Value', y = "Date", title = "Top 100 Missing Value by Date")
+```
+
+To verify and quantify the raster plot above, we have plotted a bar plot for the `Distributed` vaccine column against the number of missing values for each date. This plot again confirms the deductions drawn from the raster plot that Nov 2020 to March 2021 timeframe contains maximum missing values for the distributed column. Further, this plot gives us the relative comparision of missing values for each unique date present in the dataset.

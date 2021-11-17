@@ -24,7 +24,7 @@
 <meta name="author" content="Shashwat Singh, Mehrab Singh Gill, Siddhant Mahurkar" />
 
 
-<meta name="date" content="2021-11-10" />
+<meta name="date" content="2021-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -76,7 +76,16 @@
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#missing-value-analysis-for-cdc-covid-19-vaccination-dataset"><i class="fa fa-check"></i><b>4.1</b> Missing Value Analysis for CDC COVID-19 Vaccination Dataset</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="missing-values.html"><a href="missing-values.html#missing-value-pattern-plot"><i class="fa fa-check"></i><b>4.1.1</b> Missing Value Pattern Plot</a></li>
+<li class="chapter" data-level="4.1.2" data-path="missing-values.html"><a href="missing-values.html#cleveland-plot"><i class="fa fa-check"></i><b>4.1.2</b> Cleveland Plot</a></li>
+<li class="chapter" data-level="4.1.3" data-path="missing-values.html"><a href="missing-values.html#raster-missing-plot"><i class="fa fa-check"></i><b>4.1.3</b> Raster Missing Plot</a></li>
+<li class="chapter" data-level="4.1.4" data-path="missing-values.html"><a href="missing-values.html#bar-plot-for-number-of-missing-values-by-date-column"><i class="fa fa-check"></i><b>4.1.4</b> Bar plot for number of missing values by Date column</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -101,7 +110,30 @@
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
+<div id="missing-value-analysis-for-cdc-covid-19-vaccination-dataset" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Missing Value Analysis for CDC COVID-19 Vaccination Dataset</h2>
+<div id="missing-value-pattern-plot" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Missing Value Pattern Plot</h3>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The vaccine dataset consists of 56 unique missing patterns. The most common pattern is when there is missing values in first column which consists of around 90 percent of all the rows. Also, the dataset consist of some very less number of rows which do not have any missing values in them. Further, the last two columns do not contain any missing values in them.</p>
+</div>
+<div id="cleveland-plot" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Cleveland Plot</h3>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>This Cleveland Plot indicates the number of missing values as per the <code>Distributed</code> column of each <code>Location</code>. Further, only top 10 <code>Location</code>’s are selected because there was no significance missing value count for other locations. Since, this column had the maximum number of missing values, it is important to analyze this column before we can finally deducing any conclusions. As indicated by the graph, MH (Marshall Islands) has the highest number of missing values in the <code>Distributed</code> column.</p>
+</div>
+<div id="raster-missing-plot" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Raster Missing Plot</h3>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>The above plot indicates that there is considerable number of missing value for <code>Distributed</code> vaccines from Nov 2020 to March 2021 for each location. It is quite surprising that there was not data on vaccines distributed between this time frame. One of the reasons might be some regulations wherein different states were not sharing the information on the number of vaccines distributed to the hospitals.</p>
+</div>
+<div id="bar-plot-for-number-of-missing-values-by-date-column" class="section level3" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> Bar plot for number of missing values by Date column</h3>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>To verify and quantify the raster plot above, we have plotted a bar plot for the <code>Distributed</code> vaccine column against the number of missing values for each date. This plot again confirms the deductions drawn from the raster plot that Nov 2020 to March 2021 timeframe contains maximum missing values for the distributed column. Further, this plot gives us the relative comparision of missing values for each unique date present in the dataset.</p>
 
+</div>
+</div>
 </div>
             </section>
 
