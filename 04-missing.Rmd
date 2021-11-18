@@ -1,7 +1,7 @@
 # Missing values
 
-```{r, include = FALSE, echo = FALSE}
-knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE)
+```{r, include = FALSE, echo = FALSE, results = 'hide'}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE, results = 'hide')
 ```
 
 
@@ -72,11 +72,113 @@ ggplot(dr[1:100, ], aes(x = count, y = reorder(value, count))) + geom_col(color 
 To verify and quantify the raster plot above, we have plotted a bar plot for the `Distributed` vaccine column against the number of missing values for each date. This plot again confirms the deductions drawn from the raster plot that Nov 2020 to March 2021 timeframe contains maximum missing values for the distributed column. Further, this plot gives us the relative comparision of missing values for each unique date present in the dataset.
 
 
+## Missing Value Analysis for Statewise Employment Dataset
+
+`Legend for missing data` 
+
+`(NA): Not available.`
+
+`(D): Not shown to avoid disclosure of confidential information; estimates are included in higher-level totals.`
 
 
-Siddhant works
-sdgvsfdvdfv
-fsvfsdvdfv
-fdv dfbdf
+```{r}
+emp_df <- read.csv("resources/data/Employment.csv")
+emp_df[emp_df == "(NA)"] <- NA
+emp_df1 <- head(emp_df, - 948)
+emp_df1 <- tail(emp_df1, - 118)
+emp_df1 <- emp_df1[, c(1,2,3,5,6,7,8,27,28,29,30,31)]
+row.names(emp_df1) <- NULL
+```
 
-dfdfbd
+### Missing Values by Column When only NA is considered as missing values
+
+```{r}
+colSums(is.na(emp_df1)) %>% sort(decreasing = TRUE)
+```
+
+For analysis purpose we consider the employment data from the year 2016 to 2020. We observe that similar number of values are missing for the columns which have certain values missing.
+
+```{r}
+emp_df1[is.na(emp_df1$X2020),] %>% group_by(Description) %>% count(Description)
+```
+
+### Job Description Considered as "(D) Confidential for the year 2020"
+
+```{r, fig.width = 10}
+emp_df1 %>% filter(X2020 == "(D)") %>% group_by(Description) %>% count(Description, sort = TRUE) %>% ggplot(aes(y=reorder(Description, n), x=n)) + geom_point() + ggtitle("Cleveland Dot Plot Job Description with 'D' values") + theme(plot.title = element_text(hjust = 0.5)) + labs(y ="Job Description", x = "Missing Count")
+```
+
+Funds, trusts and other financial vehicles is the job description with maximum number of confidential classified values.
+
+### Job Description Considered as "(D)" Confidential for the year 2019
+
+```{r}
+emp_df1 %>% filter(X2019 == "(D)") %>% group_by(Description) %>% count(Description, sort = TRUE)
+```
+
+### Missing value patterns when only NA is considered as missing value
+
+```{r}
+plot_missing(emp_df1)
+```
+
+To answer the question as to is there any correlation between the vaccination rates and the level of employment in a particular type in a state, We consider the employment dataset from each state in the United States. The dataset consists of number of individuals employed in a given sector across all the states. Example of some of the employment categories are Air transportation, Telecommunications, Real Estate etc. We plot the visna style plot to analyze the umber of missing value patterns in the dataset.
+
+The results of the plot indicate that there are only two patterns of missing values in the dataset. Either all the values are present for all columns or the columns containing the employed people in a particular sector for a given year are missing. The second pattern indicates that if number of people employed in industry 'X' is missing for the year 2016 then it is missing for all the years from 2016-2020.
+
+Now after getting the description of the employment whose values are missing we notice that only the numbers pertaining to the category "Internet Publishing and Broadcasting" are missing. The reason for this can be found from the footnotes of the dataset, where they mention that after the year 2007, the category "Internet Publishing and Broadcasting" was incorporated into "Other Information Services". 
+
+Other than "(NA)" as a missing value, the dataset also has other type of missing values which is "(D)". The dataset contains "(D)" to indicate that the real value cannot is not shown to avoid the disclosure of confidential information. Some of the categories that have this value are Monetary authorities-central bank, Funds, trusts and other financial vehicles. Also the missing values for each category are almost same for the years taken into consideration. The above pattern is observed when "(D)" is not considered as NA values.
+
+### Missing Values by Column When both 'NA' and 'D'(confidential) are considered as missing values
+
+```{r}
+emp_df2 <- data.frame(emp_df1)
+emp_df2[emp_df2 == "(D)"] <- NA
+colSums(is.na(emp_df2)) %>% sort(decreasing = TRUE)
+```
+
+### Missing value patterns when both NA and D(confidential) are considered as missing values
+
+
+```{r}
+plot_missing(emp_df2)
+```
+
+We observe that multiple patterns emerge when the entry "(D)" which depicts that the real value cannot be not shown to avoid the disclosure of confidential information. We can see that the year 2017 has the most missing values then the year 2020 and so on. A total of 27 different missing patterns can be identified from the dataset.
+
+### Analysis of missing values only under the category "(D)":
+
+```{r}
+emp_pivot <- emp_df1[, c(2,6,8,9,10,11,12)] %>% filter(X2020 == "(D)" | X2019 == "(D)" | X2018 == "(D)" | X2017 == "(D)" | X2016 == "(D)") %>% pivot_longer(!c(GeoName, Description), names_to = "cat and year", values_to = "count")
+emp_pivot[emp_pivot == "(D)"] <- NA
+emp_pivot <- emp_pivot %>% group_by(GeoName) %>% mutate(by_state = sum(is.na(count)))
+```
+
+```{r}
+states <- unique(emp_pivot[c("GeoName")])
+abb <- emp_pivot$by_state[emp_pivot$GeoName %in% unlist(states)]
+mylist <- c()
+a <- abb[1]
+mylist <- c(mylist, a)
+for(i in abb){
+  if(i == a){ 
+    next
+  }
+  else{
+  mylist <- c(mylist, i)
+  a = i
+  }
+}
+mylist <- append(mylist, 20, 4)
+```
+
+
+```{r, fig.height = 8}
+da_count_by_state <- data.frame(states, mylist)
+da_count_by_state %>% mutate(GeoName = fct_reorder(GeoName, mylist, .desc = FALSE)) %>% ggplot(aes(x=GeoName, y = mylist)) + geom_col() + coord_flip() + ggtitle("Bar Chart for states and '(D)' value missing count") + theme(plot.title = element_text(hjust = 0.5)) + labs(x ="State", y = "Missing Count")
+```
+
+As clearly visible from graph we notice that when the data from years 2016-2020 is taken into consideration Delaware is the state which has the maximum number of values under the category of "(D): Not shown to avoid disclosure of confidential information". On the other hand Michigan is the state with least number of such values.
+
+Further analysis also yields that the states California and Florida have no such rows having containing the value "(D)".

@@ -7,6 +7,14 @@ missing-value-pattern-plot
 cleveland-plot
 raster-missing-plot
 bar-plot-for-number-of-missing-values-by-date-column
+missing-value-analysis-for-statewise-employment-dataset
+missing-values-by-column-when-only-na-is-considered-as-missing-values
+job-description-considered-as-d-confidential-for-the-year-2020
+job-description-considered-as-d-confidential-for-the-year-2019
+missing-value-patterns-when-only-na-is-considered-as-missing-value
+missing-values-by-column-when-both-na-and-dconfidential-are-considered-as-missing-values
+missing-value-patterns-when-both-na-and-dconfidential-are-considered-as-missing-values
+analysis-of-missing-values-only-under-the-category-d
 results
 interactive-component
 conclusion
