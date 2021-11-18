@@ -70,3 +70,13 @@ ggplot(dr[1:100, ], aes(x = count, y = reorder(value, count))) + geom_col(color 
 ```
 
 To verify and quantify the raster plot above, we have plotted a bar plot for the `Distributed` vaccine column against the number of missing values for each date. This plot again confirms the deductions drawn from the raster plot that Nov 2020 to March 2021 timeframe contains maximum missing values for the distributed column. Further, this plot gives us the relative comparision of missing values for each unique date present in the dataset.
+
+
+
+
+Siddhant works
+sdgvsfdvdfv
+fsvfsdvdfv
+fdv dfbdf
+
+dfdfbd
