@@ -7,13 +7,10 @@ missing-value-pattern-plot
 cleveland-plot
 raster-missing-plot
 bar-plot-for-number-of-missing-values-by-date-column
-missing-value-analysis-for-statewise-employment-dataset
-missing-values-by-column-when-only-na-is-considered-as-missing-values
-job-description-considered-as-d-confidential-for-the-year-2020
-job-description-considered-as-d-confidential-for-the-year-2019
-missing-value-patterns-when-only-na-is-considered-as-missing-value
-missing-values-by-column-when-both-na-and-dconfidential-are-considered-as-missing-values
+missing-value-analysis-for-us-statewise-employment-dataset
+missing-value-patterns-when-only-na-is-considered-as-missing-values
 missing-value-patterns-when-both-na-and-dconfidential-are-considered-as-missing-values
+job-description-considered-as-dconfidential-for-the-year-2020
 analysis-of-missing-values-only-under-the-category-d
 missing-value-analysis-for-fbi-offenses-known-to-law-enforcement-dataset
 using-heatmap-to-observe-the-missingness-in-the-dataset

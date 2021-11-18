@@ -72,7 +72,7 @@ ggplot(dr[1:100, ], aes(x = count, y = reorder(value, count))) + geom_col(color 
 To verify and quantify the raster plot above, we have plotted a bar plot for the `Distributed` vaccine column against the number of missing values for each date. This plot again confirms the deductions drawn from the raster plot that Nov 2020 to March 2021 timeframe contains maximum missing values for the distributed column. Further, this plot gives us the relative comparision of missing values for each unique date present in the dataset.
 
 
-## Missing Value Analysis for Statewise Employment Dataset
+## Missing Value Analysis for US Statewise Employment Dataset
 
 `Legend for missing data` 
 
@@ -90,33 +90,9 @@ emp_df1 <- emp_df1[, c(1,2,3,5,6,7,8,27,28,29,30,31)]
 row.names(emp_df1) <- NULL
 ```
 
-### Missing Values by Column When only NA is considered as missing values
+For analysis purposes we consider the employment data from the year 2016 to 2020. We observe that similar number of values are missing for the columns which have certain values missing.
 
-```{r}
-colSums(is.na(emp_df1)) %>% sort(decreasing = TRUE)
-```
-
-For analysis purpose we consider the employment data from the year 2016 to 2020. We observe that similar number of values are missing for the columns which have certain values missing.
-
-```{r}
-emp_df1[is.na(emp_df1$X2020),] %>% group_by(Description) %>% count(Description)
-```
-
-### Job Description Considered as "(D) Confidential for the year 2020"
-
-```{r, fig.width = 10}
-emp_df1 %>% filter(X2020 == "(D)") %>% group_by(Description) %>% count(Description, sort = TRUE) %>% ggplot(aes(y=reorder(Description, n), x=n)) + geom_point() + ggtitle("Cleveland Dot Plot Job Description with 'D' values") + theme(plot.title = element_text(hjust = 0.5)) + labs(y ="Job Description", x = "Missing Count")
-```
-
-Funds, trusts and other financial vehicles is the job description with maximum number of confidential classified values.
-
-### Job Description Considered as "(D)" Confidential for the year 2019
-
-```{r}
-emp_df1 %>% filter(X2019 == "(D)") %>% group_by(Description) %>% count(Description, sort = TRUE)
-```
-
-### Missing value patterns when only NA is considered as missing value
+### Missing value patterns when only NA is considered as missing values
 
 ```{r}
 plot_missing(emp_df1)
@@ -130,22 +106,31 @@ Now after getting the description of the employment whose values are missing we 
 
 Other than "(NA)" as a missing value, the dataset also has other type of missing values which is "(D)". The dataset contains "(D)" to indicate that the real value cannot is not shown to avoid the disclosure of confidential information. Some of the categories that have this value are Monetary authorities-central bank, Funds, trusts and other financial vehicles. Also the missing values for each category are almost same for the years taken into consideration. The above pattern is observed when "(D)" is not considered as NA values.
 
-### Missing Values by Column When both 'NA' and 'D'(confidential) are considered as missing values
 
 ```{r}
-emp_df2 <- data.frame(emp_df1)
-emp_df2[emp_df2 == "(D)"] <- NA
-colSums(is.na(emp_df2)) %>% sort(decreasing = TRUE)
+emp_df1[is.na(emp_df1$X2020),] %>% group_by(Description) %>% count(Description)
 ```
 
 ### Missing value patterns when both NA and D(confidential) are considered as missing values
 
 
 ```{r}
+emp_df2 <- data.frame(emp_df1)
+emp_df2[emp_df2 == "(D)"] <- NA
 plot_missing(emp_df2)
 ```
 
 We observe that multiple patterns emerge when the entry "(D)" which depicts that the real value cannot be not shown to avoid the disclosure of confidential information. We can see that the year 2017 has the most missing values then the year 2020 and so on. A total of 27 different missing patterns can be identified from the dataset.
+
+
+### Job Description Considered as "(D):Confidential" for the year 2020
+
+```{r, fig.width = 10}
+emp_df1 %>% filter(X2020 == "(D)") %>% group_by(Description) %>% count(Description, sort = TRUE) %>% ggplot(aes(y=reorder(Description, n), x=n)) + geom_point() + ggtitle("Cleveland Dot Plot Job Description with 'D' values") + theme(plot.title = element_text(hjust = 0.5)) + labs(y ="Job Description", x = "Missing Count")
+```
+
+Funds, trusts and other financial vehicles is the job description with maximum number of confidential classified values.
+
 
 ### Analysis of missing values only under the category "(D)":
 
@@ -188,9 +173,9 @@ Further analysis also yields that the states California and Florida have no such
 ## Missing Value Analysis for FBI Offenses Known to Law Enforcement Dataset
 
 ```{r}
-library(xlsx)
+library(readxl)
 
-df <- read.xlsx("resources/data/Crime.xlsx", sheetName = '20tbl08')
+df <- read_excel("resources/data/Crime.xlsx", sheet = '20tbl08')
 
 df <- data.frame(df)
 
