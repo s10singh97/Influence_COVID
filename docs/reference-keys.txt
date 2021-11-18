@@ -15,6 +15,10 @@ missing-value-patterns-when-only-na-is-considered-as-missing-value
 missing-values-by-column-when-both-na-and-dconfidential-are-considered-as-missing-values
 missing-value-patterns-when-both-na-and-dconfidential-are-considered-as-missing-values
 analysis-of-missing-values-only-under-the-category-d
+missing-value-analysis-for-fbi-offenses-known-to-law-enforcement-dataset
+using-heatmap-to-observe-the-missingness-in-the-dataset
+using-heatmap-to-observe-the-missing-values-with-no-missing-state-value
+missing-value-patterns-plot-analysis
 results
 interactive-component
 conclusion

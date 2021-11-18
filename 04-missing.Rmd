@@ -182,3 +182,92 @@ da_count_by_state %>% mutate(GeoName = fct_reorder(GeoName, mylist, .desc = FALS
 As clearly visible from graph we notice that when the data from years 2016-2020 is taken into consideration Delaware is the state which has the maximum number of values under the category of "(D): Not shown to avoid disclosure of confidential information". On the other hand Michigan is the state with least number of such values.
 
 Further analysis also yields that the states California and Florida have no such rows having containing the value "(D)".
+
+
+
+## Missing Value Analysis for FBI Offenses Known to Law Enforcement Dataset
+
+```{r}
+library(xlsx)
+
+df <- read.xlsx("resources/data/Crime.xlsx", sheetName = '20tbl08')
+
+df <- data.frame(df)
+
+# Removing the rows from above 
+df <- slice(df, -c(1, 2, 3, 4))
+
+# Excluding the description present in the last few rows
+df <- df[1:7690,]
+
+```
+
+```{r}
+# Correcting the names of States and Column names
+
+df[2,1] <- 'Alabama'
+df[1287,1] <- 'Georgia'
+df[1484,1] <- 'Illinois'
+df[2582,1] <- 'Maryland'
+df[5888,1] <- 'Pennsylvania'
+df[1,6] <- 'Rape'
+df[1,13] <- 'Arson'
+
+```
+
+```{r}
+# Renaming the column names
+
+colnames(df) <- c(df[1,1],df[1,2],df[1,3],df[1,4],df[1,5],df[1,6],df[1,7],df[1,8],df[1,9],df[1,10],df[1,11],df[1,12],df[1,13])
+
+# Removing the first row
+df <- slice(df, -c(1))
+
+```
+
+
+### Using Heatmap to observe the missingness in the dataset
+
+```{r}
+
+# Creating Heatmap from mi library to observe the missing data
+library(mi)
+y <- missing_data.frame(df)
+image(y)
+```
+
+As evident from the heatmap above, the State column has the the most number of missing data points followed by Property Crime Total, Larceny Theft, Arson and Burglary. 
+
+```{r}
+# Replacing NA values with the State name using fill from tidyr
+
+df_new <- df %>% fill(State)
+```
+
+```{r}
+# Missing values by column
+
+colSums(is.na(df_new)) %>%
+  sort(decreasing = TRUE)
+```
+
+### Using Heatmap to observe the missing values (with no missing State value)
+
+```{r}
+
+x <- missing_data.frame(df_new)
+image(x)
+```
+
+Using fill, we replaced all missing State values by the respective State name and so the State column has no missing values now. We now observe that Property Crime Total has the most number of missing values followed by Larceny-theft, Arson and Burglary. We also observe that some states in the starting indices like Alabama, Alaska and Arizona have lower number of instances compared to states in the rows having index value around 2000 like Iowa and Kansas. Column Population seems to have values on a higher scale compared to other columns while columns like Murder and nonnegligent manslaughter and Arson have values on a lower scale. Based on all the cloumns we can observe that the values columnwise are not standardized and vary to some considerable extent.
+
+### Missing Value Patterns Plot Analysis
+
+```{r}
+col <- c(1:13)
+
+#Calling the function on the new dataframe created above after filling the State names using fill
+plot_missing(df_new[, col], percent = TRUE)
+```
+
+From the plots above we can deduce that Property Crime Total and Larceny-theft have roughly the same percentage of rows missing. There are 12 unique missing patterns. We also observe that about 90% of the data does not have any missing values in them. Property Crime Total and Larceny-theft contribute towards most of the missing values while other variables have relatively lower missing values. 
