@@ -23,7 +23,7 @@ plot_missing(data[, col], percent = TRUE)
 
 ```
 
-The vaccine dataset consists of 56 unique missing patterns. The most common pattern is when there is missing values in first column which consists of around 90 percent of all the rows. Also, the dataset consist of some very less number of rows which do not have any missing values in them. Further, the last two columns do not contain any missing values in them.
+The vaccine dataset consists of 56 unique missing patterns. The most common pattern is when there are missing values in the first column which consists of around 90 percent of all the rows. Also, the dataset consist of a few number of rows with no missing values in them. Further, the last two columns do not contain any missing values in them.
 
 ### Cleveland Plot
 
@@ -45,7 +45,7 @@ ggplot(de[1:10, ], aes(x = count, y = reorder(Location, count))) + geom_point() 
 
 ```
 
-This Cleveland Plot indicates the number of missing values as per the `Distributed` column of each `Location`. Further, only top 10 `Location`'s are selected because there was no significance missing value count for other locations. Since, this column had the maximum number of missing values, it is important to analyze this column before we can finally deducing any conclusions. As indicated by the graph, MH (Marshall Islands) has the highest number of missing values in the `Distributed` column.
+This Cleveland Plot indicates the number of missing values as per the `Distributed` column of each `Location`. Further, only the top 10 `Location`'s are selected because there was no significant missing value count for other locations. Since, this column had the maximum number of missing values, it is important to analyze this column before we can finally deduce any conclusions. As indicated by the graph, MH (Marshall Islands) has the highest number of missing values in the `Distributed` column.
 
 ### Raster Missing Plot
 
@@ -55,7 +55,7 @@ ggplot(ddf, aes(x = value, y = factor(Location))) + geom_tile(fill = ifelse(ddf$
 
 ```
 
-The above plot indicates that there is considerable number of missing value for `Distributed` vaccines from Nov 2020 to March 2021 for each location. It is quite surprising that there was not data on vaccines distributed between this time frame. One of the reasons might be some regulations wherein different states were not sharing the information on the number of vaccines distributed to the hospitals. 
+The above plot indicates that there are considerable number of missing values for `Distributed` vaccines from Nov 2020 to March 2021 for each location. It is quite surprising that there was no data on vaccines distributed between this time frame. One of the reasons might be due to some regulations wherein different states were not sharing the information on the number of vaccines distributed to the hospitals. 
 
 ### Bar plot for number of missing values by Date column
 
@@ -69,7 +69,7 @@ dr <- ddf %>%
 ggplot(dr[1:100, ], aes(x = count, y = reorder(value, count))) + geom_col(color = "blue", fill = "lightblue") + labs(x = 'Number of Missing Value', y = "Date", title = "Top 100 Missing Value by Date")
 ```
 
-To verify and quantify the raster plot above, we have plotted a bar plot for the `Distributed` vaccine column against the number of missing values for each date. This plot again confirms the deductions drawn from the raster plot that Nov 2020 to March 2021 timeframe contains maximum missing values for the distributed column. Further, this plot gives us the relative comparision of missing values for each unique date present in the dataset.
+To verify and quantify the raster plot above, we have plotted a bar plot for the `Distributed` vaccine column against the number of missing values for each date. This plot again confirms the deductions drawn from the raster plot that Nov 2020 to March 2021 timeframe contains maximum missing values for the distributed column. Further, this plot gives us the relative comparison of missing values for each unique date present in the dataset.
 
 
 ## Missing Value Analysis for US Statewise Employment Dataset
@@ -90,7 +90,7 @@ emp_df1 <- emp_df1[, c(1,2,3,5,6,7,8,27,28,29,30,31)]
 row.names(emp_df1) <- NULL
 ```
 
-For analysis purposes we consider the employment data from the year 2016 to 2020. We observe that similar number of values are missing for the columns which have certain values missing.
+For analysis purposes, we consider the employment data from the year 2016 to 2020. We observe that similar number of values are missing for the columns which have certain values missing.
 
 ### Missing value patterns when only NA is considered as missing values
 
@@ -98,13 +98,13 @@ For analysis purposes we consider the employment data from the year 2016 to 2020
 plot_missing(emp_df1)
 ```
 
-To answer the question as to is there any correlation between the vaccination rates and the level of employment in a particular type in a state, We consider the employment dataset from each state in the United States. The dataset consists of number of individuals employed in a given sector across all the states. Example of some of the employment categories are Air transportation, Telecommunications, Real Estate etc. We plot the visna style plot to analyze the umber of missing value patterns in the dataset.
+To answer the question as to is there any correlation between the vaccination rates and the level of employment in a particular state, we consider the employment data for each state in the United States. The dataset consists of the number of individuals employed in a given sector across all the states. Example of some of the employment categories are Air transportation, Telecommunications, Real Estate etc. We plot the visna style plot to analyze the number of missing value patterns in the dataset.
 
-The results of the plot indicate that there are only two patterns of missing values in the dataset. Either all the values are present for all columns or the columns containing the employed people in a particular sector for a given year are missing. The second pattern indicates that if number of people employed in industry 'X' is missing for the year 2016 then it is missing for all the years from 2016-2020.
+The results of the plot indicate that there are only two patterns of missing values in the dataset. Either all the values are present for all columns or the columns containing the employed people in a particular sector for a given year are missing. The second pattern indicates that if the number of people employed in industry 'X' is missing for the year 2016, then it is missing for all the years from 2016-2020.
 
-Now after getting the description of the employment whose values are missing we notice that only the numbers pertaining to the category "Internet Publishing and Broadcasting" are missing. The reason for this can be found from the footnotes of the dataset, where they mention that after the year 2007, the category "Internet Publishing and Broadcasting" was incorporated into "Other Information Services". 
+Now after getting the description of the employment whose values are missing, we notice that only the numbers pertaining to the category "Internet Publishing and Broadcasting" are missing. The reason for this can be found from the footnotes of the dataset, where they mention that after the year 2007, the category "Internet Publishing and Broadcasting" was incorporated into "Other Information Services". 
 
-Other than "(NA)" as a missing value, the dataset also has other type of missing values which is "(D)". The dataset contains "(D)" to indicate that the real value cannot is not shown to avoid the disclosure of confidential information. Some of the categories that have this value are Monetary authorities-central bank, Funds, trusts and other financial vehicles. Also the missing values for each category are almost same for the years taken into consideration. The above pattern is observed when "(D)" is not considered as NA values.
+Other than "(NA)" as a missing value, the dataset also has other type of missing values which is "(D)". The dataset contains "(D)" to indicate that the real value is not shown to avoid the disclosure of confidential information. Some of the categories that have this value are Monetary authorities-central bank, Funds, trusts and other financial vehicles. Also the missing values for each category are almost same for the years taken into consideration. The above pattern is observed when "(D)" is not considered as an NA value.
 
 
 ```{r}
@@ -120,7 +120,7 @@ emp_df2[emp_df2 == "(D)"] <- NA
 plot_missing(emp_df2)
 ```
 
-We observe that multiple patterns emerge when the entry "(D)" which depicts that the real value cannot be not shown to avoid the disclosure of confidential information. We can see that the year 2017 has the most missing values then the year 2020 and so on. A total of 27 different missing patterns can be identified from the dataset.
+We observe that multiple patterns emerge when the entry "(D)" is considered as an NA value. We can see that the year 2017 has the most number of missing values followed by the year 2020 and so on. A total of 27 different missing patterns can be identified from the dataset.
 
 
 ### Job Description Considered as "(D):Confidential" for the year 2020
@@ -129,7 +129,7 @@ We observe that multiple patterns emerge when the entry "(D)" which depicts that
 emp_df1 %>% filter(X2020 == "(D)") %>% group_by(Description) %>% count(Description, sort = TRUE) %>% ggplot(aes(y=reorder(Description, n), x=n)) + geom_point() + ggtitle("Cleveland Dot Plot Job Description with 'D' values") + theme(plot.title = element_text(hjust = 0.5)) + labs(y ="Job Description", x = "Missing Count")
 ```
 
-Funds, trusts and other financial vehicles is the job description with maximum number of confidential classified values.
+"Funds, trusts and other financial vehicles" is the job description with maximum number of confidential classified values.
 
 
 ### Analysis of missing values only under the category "(D)":
@@ -164,9 +164,9 @@ da_count_by_state <- data.frame(states, mylist)
 da_count_by_state %>% mutate(GeoName = fct_reorder(GeoName, mylist, .desc = FALSE)) %>% ggplot(aes(x=GeoName, y = mylist)) + geom_col() + coord_flip() + ggtitle("Bar Chart for states and '(D)' value missing count") + theme(plot.title = element_text(hjust = 0.5)) + labs(x ="State", y = "Missing Count")
 ```
 
-As clearly visible from graph we notice that when the data from years 2016-2020 is taken into consideration Delaware is the state which has the maximum number of values under the category of "(D): Not shown to avoid disclosure of confidential information". On the other hand Michigan is the state with least number of such values.
+As clearly visible from graph, we notice that when the data from the years 2016-2020 is taken into consideration, Delaware is the state which has the maximum number of values under the category of "(D): Not shown to avoid disclosure of confidential information". On the other hand, Michigan is the state with least number of such values.
 
-Further analysis also yields that the states California and Florida have no such rows having containing the value "(D)".
+Further analysis also yields that the states California and Florida have no such rows containing the value "(D)".
 
 
 
@@ -221,7 +221,7 @@ y <- missing_data.frame(df)
 image(y)
 ```
 
-As evident from the heatmap above, the State column has the the most number of missing data points followed by Property Crime Total, Larceny Theft, Arson and Burglary. 
+As evident from the heatmap above, the `State` column has the the most number of missing data points followed by `Property Crime Total`, `Larceny-theft`, `Arson` and `Burglary`. 
 
 ```{r}
 # Replacing NA values with the State name using fill from tidyr
@@ -244,7 +244,7 @@ x <- missing_data.frame(df_new)
 image(x)
 ```
 
-Using fill, we replaced all missing State values by the respective State name and so the State column has no missing values now. We now observe that Property Crime Total has the most number of missing values followed by Larceny-theft, Arson and Burglary. We also observe that some states in the starting indices like Alabama, Alaska and Arizona have lower number of instances compared to states in the rows having index value around 2000 like Iowa and Kansas. Column Population seems to have values on a higher scale compared to other columns while columns like Murder and nonnegligent manslaughter and Arson have values on a lower scale. Based on all the cloumns we can observe that the values columnwise are not standardized and vary to some considerable extent.
+Using fill, we replaced all missing `State` values by the respective State name and so the `State` column has no missing values now. We now observe that `Property Crime Total` has the most number of missing values followed by `Larceny-theft`, `Arson` and `Burglary`. We also observe that some states like Alabama, Alaska and Arizon (which are the initial observations of the heatmap) have lower number of instances compared to states like Iowa and Kansas  (having observation numbers around 2000). Column `Population` seems to have values on a higher scale compared to other columns while columns like `Murder and nonnegligent manslaughter` and `Arson` have values on a lower scale. Based on all the columns, we can observe that the values are not standardized.
 
 ### Missing Value Patterns Plot Analysis
 
@@ -255,4 +255,4 @@ col <- c(1:13)
 plot_missing(df_new[, col], percent = TRUE)
 ```
 
-From the plots above we can deduce that Property Crime Total and Larceny-theft have roughly the same percentage of rows missing. There are 12 unique missing patterns. We also observe that about 90% of the data does not have any missing values in them. Property Crime Total and Larceny-theft contribute towards most of the missing values while other variables have relatively lower missing values. 
+From the plots above we can deduce that `Property Crime Total` and `Larceny-theft` have roughly the same percentage of missing rows. We can observe that there are 12 unique missing patterns. We also observe that about 90% of the data does not have any missing values in them. `Property Crime Total` and `Larceny-theft` contribute towards most of the missing values while other variables have relatively lower missing values. 
