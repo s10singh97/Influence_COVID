@@ -1,9 +1,18 @@
 --- 
-title: "Influence of COVID19 on the behavioral patterns of people"
-author: "Shashwat Singh, Mehrab Singh Gill, Siddhant Mahurkar"
+title: "Influence on COVID-19 Vaccination due to different socio-economic conditions in the US"
+author: "Shashwat Singh (ss6373), Mehrab Singh Gill (mg4353), Siddhant Mahurkar (sm5129)"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
 # Introduction
 
+The COVID-19 pandemic has had a significant impact on the lives of people in the US. It has not only affected people’s health but also affected the entire nation’s ecosystem. The only remedy we have currently to put a hold on this outbreak is a successful nationwide vaccination drive. Even though many vaccines such as Pfizer, Moderna and Johnson & Johnson have been rolled out in the US, there are still some apprehensions concerning the vaccine. In addition to that, there also exists the problem of vaccine wastage. Through this project, we will try to explore the correlation between features such as vaccination rates, level of education, employment, crime rates and the elected political party of the state which influence the vaccination drive as well as the people’s perception of the vaccine.
+
+## Problem Statement:
+
+We will mainly try to answer the following questions:
+
+1. With ongoing vaccination drives, is there some correlation between the vaccination rates and level of education attained by people and the type of employment in that state?
+2. Are the vaccinations being administered lower in states/ counties with higher crime rates? If so, which of these states have the lowest administered vaccines?
+3. Analyzing each state’s distribution and administration of vaccines in order to deduce the performance of political parties with respect to the vaccine wastage crisis. Further, investigate the vaccine administration with respect to various age groups, the type of vaccine administered and the number of doses administered.
