@@ -9,6 +9,8 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE, results = 
 
 ### Missing Value Pattern Plot
 
+`column name on xticks are abbreviated and rotated by 90 degree to avoid overlapping due to large column names`
+
 ```{r, fig.height = 15}
 
 library(tidyverse)
@@ -18,6 +20,8 @@ data <- read.csv("resources/data/vaccine.csv")
 data[data == 0] = NA
 col <- c(1:30)
 col <- col[-c(2,4,9,13,21,25)]
+
+plot_missing(data[, col])
 
 plot_missing(data[, col], percent = TRUE)
 
@@ -252,6 +256,9 @@ Using fill, we replaced all missing `State` values by the respective State name 
 col <- c(1:13)
 
 #Calling the function on the new dataframe created above after filling the State names using fill
+
+plot_missing(df_new[, col])
+
 plot_missing(df_new[, col], percent = TRUE)
 ```
 
