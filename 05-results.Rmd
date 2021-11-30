@@ -1,1 +1,230 @@
 # Results
+
+```{r, include = FALSE, echo = FALSE, results = 'hide'}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE, results = 'hide')
+```
+
+```{r}
+
+library(tidyverse)
+library(choroplethr)
+library(choroplethrMaps)
+library(ggridges)
+library(statebins)
+library(stringr)
+library(viridis)
+library(patchwork)
+library(ggrepel)
+library(readxl)
+
+vaccine <- read.csv("resources/data/vaccine.csv")
+education <- read.csv("resources/data/education.csv")
+employment <- read.csv("resources/data/Employment.csv")
+
+# Population in each US state (Census 2020)
+population <- read_excel("resources/data/population.xlsx", col_names = FALSE)
+population <- slice(population, -c(1:3))
+names(population) <- population[1,]
+population <- slice(population, -c(1))
+names(population) <- c("region", "pop")
+population <- population[,1:2] %>% 
+  filter(region %in% state.name)
+
+```
+
+## Correlation between Vaccination, level of education, and the type of employment which is dominant in a state
+
+
+```{r, fig.height=14}
+
+vaccine$Date = as.Date(vaccine$Date, format = "%m/%d/%y")
+
+df1 <- vaccine %>% 
+  mutate(Date = format(Date, "%m/%y")) %>% 
+  group_by(Location, Date) %>% 
+  summarise_at(vars(-MMWR_week), sum) %>% 
+  filter(Location != 'US' & Location %in% state.abb)
+  
+ggplot(df1, aes(x = Distributed, y = reorder(Location, Distributed), color = Date)) + geom_point() + ylab("Location")
+
+```
+
+The above plot displays the number of vaccines distributed each month. It seems that the maximum number of vaccines were distributed in October, 2020, followed by Spetember 2020. Additionally, it is important to note that states with huge population like California and Texas received the maximum number of vaccines. Thus, we can conlcude that the vaccines were distributed as per the population of each state. States with higher population received more vaccines than states with less popualation.
+
+
+```{r, fig.height=12, fig.show='hide'}
+
+df2 <- df1 %>% 
+  group_by(Location) %>% 
+  summarise_at(vars(-Date), sum) %>% 
+  pivot_longer(cols = c("Administered_Janssen", "Administered_Pfizer", "Administered_Moderna"), names_to = "Type", values_to = "Amount_Administered")
+
+ggplot(df2, aes(x = Amount_Administered, y = reorder(Location, Amount_Administered), color = Type)) + geom_point() + ylab("Location")
+
+
+```
+
+```{r, fig.height=12, fig.show='hide'}
+
+df3 <- df1 %>% 
+  group_by(Location) %>% 
+  summarise_at(vars(-Date), sum) %>% 
+  arrange(desc(Distributed))
+
+ggplot(df3) +
+  geom_point(aes(y = reorder(Location, Administered), x = Distributed, color = "Distributed")) +
+  geom_point(aes(y = reorder(Location, Administered), x = Administered, color = "Administered")) +
+  ylab("Location")
+
+```
+
+```{r, fig.show='hide'}
+
+ggplot(df3, aes(x = Distributed, y = Administered)) + geom_hex(bins = 20, color = 'black') + scale_fill_gradient(low = 'lightyellow', high = 'blue')
+
+```
+
+```{r, fig.width=14, fig.show='hide'}
+
+ggplot(df2, aes(x = Amount_Administered, fill = Type)) + 
+  geom_density(alpha = 0.3, adjust = 0.5)
+
+```
+
+```{r, fig.show='hide'}
+
+ggplot(df2, aes(x = Amount_Administered, y = Type, fill = Type)) + geom_density_ridges(scale = 1, alpha = 0.5)
+
+```
+
+
+
+```{r}
+
+de1 <- education %>% 
+  filter(tolower(State) != "united states") %>% 
+  transmute(region = tolower(State), value = Value) %>% 
+  mutate(value = as.numeric(value)) %>% 
+  group_by(region) %>% 
+  summarise(value = sum(value, na.rm = TRUE))
+  
+p_d <- population %>%
+  mutate(region = str_to_lower(region)) %>% 
+  filter(region %in% tolower(state.name))
+  
+pop_de1 <- full_join(de1, p_d, by = "region") %>% 
+  filter(region %in% tolower(state.name)) %>% 
+  mutate(pop = as.numeric(pop)) %>% 
+  mutate(value = value*100/pop)
+
+state_choropleth(pop_de1, title = "State Education Density (2019-20)", legend = "% of people educated")
+
+```
+
+The above plot indicates the percentage of people educated in each state. We can see that the states of Texas, California, Colorado have the maximum literacy rate (between 40 to 55 percent) while some states such as Wyoming and Montana have the least literacy rate (between 6.5 to 12 percent).
+
+```{r, fig.height=14, fig.width=14}
+
+de2 <- education %>% 
+  filter(tolower(State) != "united states")
+
+de3 <- de2 %>% 
+  group_by(State, Population) %>% 
+  summarise(freq = n()) %>% 
+  mutate(State = str_to_title(State))
+
+ggplot(de3, aes(state = State, fill = freq)) +
+  geom_statebins() +
+  facet_wrap(~Population, ncol = 2) +
+  scale_fill_viridis(option = "magma", name = "# of People", direction = -1)
+```
+
+The above graph shows the number of different kind of students who were receiving education. There were very few students who remained absent from schools and colleges. This shows that the students are serious about the education and attend the classes regularly. English Learner Teachers and Migratory students were very low in number and are evenly spread across the country. We can also note that fairly very few students attained their education from Local Educational Agency.
+
+Another important thing to look at is the number of English learners. These type of students are predominantly more localized in big states such as California and Texas. Additionally, an interesting feature to note is that the number of homeless students attaining the education are also larger for these states. It is also a good sign that there are more number of homeless students who are working towards receiving their education.
+
+
+```{r}
+
+num_conv <- function(x) (x <- as.numeric(x))
+
+dm1 <- employment %>% 
+  filter(tolower(GeoName) != "united states")
+dm1 <- dm1 %>%
+  mutate_at(names(dm1)[9:31], num_conv)
+dm1 <- dm1 %>% 
+  mutate(Total = rowSums(dm1[names(dm1)[9:31]], na.rm = TRUE))
+
+desc_ignore <- c("Total employment (number of jobs)", "Nonfarm employment", "Private nonfarm employment", "Wage and salary employment", "Proprietors employment", "Nonfarm proprietors employment 2/")
+
+dm2 <- dm1 %>% 
+  mutate(Description = trimws(Description)) %>% 
+  filter(!Description %in% desc_ignore) %>%
+  group_by(GeoName) %>%
+  slice(which.max(Total)) %>%
+  filter(GeoName %in% state.name)
+
+```
+
+
+
+```{r}
+
+state_abb <- state.abb
+
+df5 <- df1 %>% 
+  group_by(Location) %>% 
+  summarise_at(vars(-Date), sum) %>% 
+  select(Location, Administered) %>%
+  filter(Location %in% state_abb) %>% 
+  mutate(Location = state.name[match(Location, state.abb)]) %>% 
+  transmute(region = Location, Administered)
+
+de1 <- de1 %>% 
+  mutate(region = str_to_title(region)) %>% 
+  filter(region %in% state.name)
+
+vac_edu <- full_join(df5, de1, by = "region")
+vac_edu <- full_join(vac_edu, population, by = "region")
+
+vac_edu <- vac_edu %>%
+  mutate(pop = as.numeric(pop)) %>% 
+  mutate(density = Administered/pop) %>% 
+  mutate(edu_density = value*100/pop)
+  
+
+ggplot(vac_edu, aes(y = density, x = edu_density)) + geom_point(alpha = 0.5) + geom_text_repel(aes(label = region)) + geom_smooth(method = "lm", se = FALSE) + labs(y = "Vaccination Density", x = "% of educated people")
+
+```
+
+Therefore, from the plot above, we can analyze that as the percentage of educated people increases, the vaccination density also increases. Although the slope of the graph is not large indicating that there is not much dependence, but still it depicts that there will be some improvement in the vaccination rate if more people are educated.
+
+Some interesting trend to note is that California and Texas both has a very large percentage of educated people but still California had a better Vaccination Density than Texas. While there are some other states as well such as Vermont and Maine where the percentage of educated people are very less but still they have a very high number of vaccine administration density.
+
+```{r, fig.height=8, fig.width=14}
+
+dm3 <- dm2 %>% 
+  transmute(region = GeoName, Description)
+
+vac_emp <- full_join(df5, dm3, by = c("region"))
+vac_emp <- full_join(vac_emp, population, by = "region")
+
+vac_emp <- vac_emp %>% 
+  mutate(pop = as.numeric(pop)) %>% 
+  mutate(density = Administered/pop)
+
+p1 <- ggplot(vac_emp, aes(x = density, y = reorder(region, density))) + geom_point(aes(color = Description)) + ylab("State") + xlab("Vaccination Density")
+
+p2 <- ggplot(dm2, aes(x = Description, y = ..count..)) + geom_bar(fill = "lightblue", color = "blue") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+final_plot = p1 + p2  + plot_layout(guides = "collect") & theme(legend.position = "bottom")
+
+plot(final_plot)
+
+```
+
+The above plot on the left displays the number of Vaccination Density (vaccines administered/population) in each state and the type of employment that is prominent in that particular state historically. We can observe that the majority of the people who have been administered a vaccine work in Government Enterprises or in Health Care Services. This might be happening because of the certain government policies wherein in front-line healthcare workers were being vaccinated first and thus the majority of the population vaccinated is composed of them.
+
+Additionally, state of New Hampshire, where the dominant profession is Retail Trade also shows a good percentage of people having vaccinated. Some states like Alabama and Mississippi have the lowest vaccination density even when the primary profession of people in those states is a government job. This indicates that government of these states should focus more on the vaccination drive. Nevada being a heavy employer in accommodation services is doing good but can definitely work on it's vaccination program to get more people vaccinated.
+
+The graph on the right indicate the number of states that have a particular kind of maximum employment areas historically. This shows that maximum states in US have been historically employing people in government enterprises. Thus, these states should have been better in terms of vaccination. But as we can see from the graph on the left, people from these area of employment have not been quite enthusiastic about the vaccination drive in some states.

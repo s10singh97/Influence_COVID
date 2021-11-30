@@ -18,5 +18,6 @@ using-heatmap-to-observe-the-missingness-in-the-dataset
 using-heatmap-to-observe-the-missing-values-with-no-missing-state-value
 missing-value-patterns-plot-analysis
 results
+correlation-between-vaccination-level-of-education-and-the-type-of-employment-which-is-dominant-in-a-state
 interactive-component
 conclusion
