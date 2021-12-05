@@ -21,3 +21,9 @@ results
 correlation-between-vaccination-level-of-education-and-the-type-of-employment-which-is-dominant-in-a-state
 interactive-component
 conclusion
+vaccination-dataset
+employment-dataset
+education-dataset
+population-dataset
+crime-dataset
+election-dataset

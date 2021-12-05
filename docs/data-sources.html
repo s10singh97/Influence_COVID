@@ -24,7 +24,7 @@
 <meta name="author" content="Shashwat Singh (ss6373), Mehrab Singh Gill (mg4353), Siddhant Mahurkar (sm5129)" />
 
 
-<meta name="date" content="2021-11-30" />
+<meta name="date" content="2021-12-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -77,7 +77,15 @@
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#problem-statement"><i class="fa fa-check"></i><b>1.1</b> Problem Statement:</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#vaccination-dataset"><i class="fa fa-check"></i><b>2.1</b> Vaccination Dataset</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#employment-dataset"><i class="fa fa-check"></i><b>2.2</b> Employment Dataset</a></li>
+<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#education-dataset"><i class="fa fa-check"></i><b>2.3</b> Education Dataset</a></li>
+<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#population-dataset"><i class="fa fa-check"></i><b>2.4</b> Population Dataset</a></li>
+<li class="chapter" data-level="2.5" data-path="data-sources.html"><a href="data-sources.html#crime-dataset"><i class="fa fa-check"></i><b>2.5</b> Crime Dataset</a></li>
+<li class="chapter" data-level="2.6" data-path="data-sources.html"><a href="data-sources.html#election-dataset"><i class="fa fa-check"></i><b>2.6</b> Election Dataset</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a>
 <ul>
@@ -129,7 +137,50 @@
             <section class="normal" id="section-">
 <div id="data-sources" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
+<p>We have used 6 different datsets in this project. Since we wanted to see how different things correlate with each other (e.g. vaccination status and education level), therefore, we chose multiple dataset to get multiple factors into consideration before concluding a result. All datasets have been downloaded from original data source.</p>
+<div id="vaccination-dataset" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Vaccination Dataset</h2>
+<p><strong>Link:</strong> <a href="https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc/data">CDC Vaccination Dataset</a></p>
+<p><strong>Overall Description:</strong> This dataset has been downloaded from Center of Disease Control (CDC) website. It contains details of the vaccination for each state over a period of time. It also contains additional details on number of different kind of vaccines administered, distributed both state wise and age wise. In total this dataset has 69 columns with 21528 observations.</p>
+<p><strong>Name of Columns:</strong> Data, MMWR_week, Location, Distributed, Distributed_Janssen, Distributed_Moderna, Distributed_Pfizer, Distributed_Unk_Manuf, Dist_Per_100K, Distributed_Per_100k_12Plus, Distributed_Per_100k_18Plus, Distributed_Per_100k_65Plus, Administered, Administered_12Plus, Administered_18Plus, Administered_65Plus, Administered_Janssen, Administered_Moderna, Administered_Pfizer, Administered_Unk_Manuf, Admin_Per_100K, Admin_Per_100k_12Plus, Admin_Per_100k_18Plus, Admin_Per_100k_65Plus, Recip_Administered, Administered_Dose1_Recip, Administered_Dose1_Pop_Pct, Administered_Dose1_Recip_12Plus, Administered_Dose1_Recip_12PlusPop_Pct, Administered_Dose1_Recip_18Plus, Administered_Dose1_Recip_18PlusPop_Pct, Administered_Dose1_Recip_65Plus, Administered_Dose1_Recip_65PlusPop_Pct, Series_Complete_Yes, Series_Complete_Pop_Pct, Series_Complete_12Plus, Series_Complete_12PlusPop_Pct, Series_Complete_18Plus, Series_Complete_18PlusPop_Pct, Series_Complete_65Plus, Series_Complete_65PlusPop_Pct, Series_Complete_Janssen, Series_Complete_Moderna, Series_Complete_Pfizer, Series_Complete_Unk_Manuf, Series_Complete_Janssen_12Plus, Series_Complete_Moderna_12Plus, Series_Complete_Pfizer_12Plus, Series_Complete_Unk_Manuf_12Plus, Series_Complete_Janssen_18Plus, Series_Complete_Moderna_18Plus, Series_Complete_Pfizer_18Plus, Series_Complete_Unk_Manuf_18Plus, Series_Complete_Janssen_65Plus, Series_Complete_Moderna_65Plus, Series_Complete_Pfizer_65Plus, Series_Complete_Unk_Manuf_65Plus, Additional_Doses, Additional_Doses_Vax_Pct, Additional_Doses_18Plus, Additional_Doses_18Plus_Vax_Pct, Additional_Doses_50Plus, Additional_Doses_50Plus_Vax_Pct, Additional_Doses_65Plus, Additional_Doses_65Plus_Vax_Pct, Additional_Doses_Moderna, Additional_Doses_Pfizer, Additional_Doses_Janssen, Additional_Doses_Unk_Manuf.</p>
+<p><strong>Column Description:</strong> This dataset contains all the numerical columns except for <code>Date</code> and <code>Location</code> column which contains date type and categorical variable respectively.</p>
+</div>
+<div id="employment-dataset" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Employment Dataset</h2>
+<p><strong>Link:</strong> <a href="https://apps.bea.gov/regional/downloadzip.cfm">Statewise GDP - Annual (BEA) Dataset</a></p>
+<p><strong>Overall Description:</strong> This dataset has been downloaded from Bureau of Economic Analysis (US Department of Commerce) and contains the historical Employment statistics of the US from 1998 to 2020. This will help us in correlating the overall employment trend of each state with various other dataset. It contains a total of 31 columns with 7084 observations.</p>
+<p><strong>Name of Columns:</strong> GeoFIPS, GeoName, Region, TableName, LineCode, IndustryClassification, Description, Unit, X1998, X1999, X2000, X2001, X2002, X2003, X2004, X2005, X2006, X2007, X2008, X2009, X2010, X2011, X2012, X2013, X2014, X2015, X2016, X2017, X2018, X2019, X2020.</p>
+<p><strong>Column Description:</strong> The columns <code>X1998 to X2020</code>, <code>GeoFIPS</code>, <code>LineCode</code> contain numerical values. While columns <code>GeoName</code>, <code>TableName</code>, <code>IndustryClassification</code>, <code>Descripition</code> contain categorical values.</p>
+</div>
+<div id="education-dataset" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Education Dataset</h2>
+<p><strong>Link:</strong> <a href="https://eddataexpress.ed.gov/download">Education (Department of Education) Dataset</a></p>
+<p><strong>Overall Description:</strong> Downloaded from US Department of Education website, this dataset contains the different type of students and their count in number for each state in which they received their education. It also contains the type of program they were enrolled in and along with different sub-categories of each program type. It contains 12 columns with 513721 observations.</p>
+<p><strong>Name of Columns:</strong> School.Year, State, NCES.LEA.ID, LEA, Data.Group, Data.Description, Value, Population, Category, Sub.Category, Grade.Level, Program.Type.</p>
+<p><strong>Column Description:</strong> The only numerical column in <code>value</code> column, rest all other are categorical in nature.</p>
+</div>
+<div id="population-dataset" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Population Dataset</h2>
+<p><strong>Link:</strong> <a href="https://www.census.gov/data/tables/2020/dec/2020-apportionment-data.html">US Census Dataset</a></p>
+<p><strong>Overall Description:</strong> This dataset is downloaded from US Census Bureau website. It contains only two columns namely <code>State</code> and <code>Population (April 1, 2021)</code>. It depicts the statewide population distribution as of April 1, 2021. This dataset contains a total of 2 columns and 50 observations.</p>
+<p><strong>Name of Columns:</strong> State, Population (April 1, 2021).</p>
+<p><strong>Column Description:</strong> One numerical column <code>Population (April 1, 2021)</code> along with one categorical column namely <code>State</code>.</p>
+</div>
+<div id="crime-dataset" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Crime Dataset</h2>
+<p><strong>Link:</strong> <a href="https://crime-data-explorer.fr.cloud.gov/pages/downloads">Crime Dataset</a></p>
+<p><strong>Overall Description:</strong> This dataset is downloaded from FBI Crime Data Explorer. It contains statewide and citywide distributions for different type of crimes that were reported. This dataset contains a total of 13 columns and 7689 observations.</p>
+<p><strong>Name of Columns:</strong> State, City, Population, Violent Crime Total, Murder and nonnegligent manslaughter, Rape1, Robbery, Aggravated assault, Property Crime Total, Burglary, Larceny-theft, Motor vehicle theft, Arson2.</p>
+<p><strong>Column Description:</strong> It contains all numerical columns except <code>State</code> and <code>City</code> which contain different cities for each state.</p>
+</div>
+<div id="election-dataset" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Election Dataset</h2>
+<p><strong>Link:</strong> <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU">History of Local Elected State Party Dataset</a></p>
+<p><strong>Overall Description:</strong> This dataset is downloaded from Harvard Dataverse website. It contains historical state election results and details of prty which won and the candidate who got elected along with the total number of votes casted in that election. This dataset contains a total of 19 columns and 3629 observations.</p>
+<p><strong>Name of Columns:</strong> year, state, state_po, state_fips, state_cen, state_ic, office, district, stage, special, candidate, party_detailed, writein, mode, candidatevotes, totalvotes, unofficial, version, party_simplified.</p>
+<p><strong>Column Description:</strong> <code>year</code>, <code>candidatevote</code> and <code>totalvotes</code> are numerical in nature while all other columns contains categorical values.</p>
 
+</div>
 </div>
             </section>
 

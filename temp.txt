@@ -1,0 +1,12 @@
+School.Year
+State
+NCES.LEA.ID
+LEA
+Data.Group
+Data.Description
+Value
+Population
+Category
+Sub.Category
+Grade.Level
+Program.Type
