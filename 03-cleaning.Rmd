@@ -1,1 +1,31 @@
 # Data transformation
+
+## Transformations for Vaccination Dataset
+
+1. Converted the `Date` column into the Date datatype. Removed `MMR_week` as this was of no use to our problem statement.
+2. Grouped the dataset by `Location` and `Date`.
+3. Filtered locations to remove any cumulative indicators such as rows containing 'US' and also removed states such as 'District of Columbia' which were not present in the inbuilt "state" dataset included in R. Primarily did this to avoid any merge conflicts with other datasets.  
+
+
+## Transformations for Education Dataset
+
+1. Converted character data into numerical datatype for the `value` column by type casting.
+2. Filtered rows to not contain any cumulative indicators such as 'United States'.
+3. Grouped by each state and allowed and allowed 'NA' values in the `value` column to be considered as 0 using na.rm = True while summarizing the data after grouping.
+4. Performed a full join operation with population dataset on the `state` column to further normalize the `value` column of the education dataset by the population of each state to get a normalized education density of each state.
+
+## Transformations for Employment Dataset
+
+1. Filtered dataset to not contain any cumulative indicators such as 'United States' since we are doing a state-wise analysis.
+2. All character columns containing numerical values were converted to numercial datatype.
+3. Another column named `Total` was introduced which contained the sum of the rows containing any numerical value. This column indicated the sum of historical employment data.
+4. Some values that did not give any insight in the `Description` column was filtered out as well. This included "Total employment (number of jobs)", "Nonfarm employment", "Private nonfarm employment", "Wage and salary employment", "Proprietors employment", "Nonfarm proprietors employment 2/". As these all values already had more specific sub-categories, keeping these values did not provided any advantage.
+
+## Transformations for Population Dataset
+
+1. Multiple columns names were read into rows by the read_excel function. These rows were removed and appropriate column name was provided to each column.
+2. Only `state` and `population` columns were retained as we only needed this data to find out the density of any given parameter to compare multiple parameters efficiently.
+
+## Transformations for Crime Dataset
+
+## Transformations for Election Dataset

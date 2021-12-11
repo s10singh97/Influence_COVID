@@ -5,7 +5,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE, results = 
 ```
 
 
-## Missing Value Analysis for CDC COVID-19 Vaccination Dataset
+## Missing Value Analysis for Vaccination Dataset
 
 ### Missing Value Pattern Plot
 
@@ -21,7 +21,7 @@ data[data == 0] = NA
 col <- c(1:30)
 col <- col[-c(2,4,9,13,21,25)]
 
-plot_missing(data[, col])
+# plot_missing(data[, col])
 
 plot_missing(data[, col], percent = TRUE)
 
@@ -76,7 +76,7 @@ ggplot(dr[1:100, ], aes(x = count, y = reorder(value, count))) + geom_col(color 
 To verify and quantify the raster plot above, we have plotted a bar plot for the `Distributed` vaccine column against the number of missing values for each date. This plot again confirms the deductions drawn from the raster plot that Nov 2020 to March 2021 timeframe contains maximum missing values for the distributed column. Further, this plot gives us the relative comparison of missing values for each unique date present in the dataset.
 
 
-## Missing Value Analysis for US Statewise Employment Dataset
+## Missing Value Analysis for Employment Dataset
 
 `Legend for missing data` 
 
@@ -174,7 +174,7 @@ Further analysis also yields that the states California and Florida have no such
 
 
 
-## Missing Value Analysis for FBI Offenses Known to Law Enforcement Dataset
+## Missing Value Analysis for Crime Dataset
 
 ```{r}
 library(readxl)
@@ -257,9 +257,11 @@ col <- c(1:13)
 
 #Calling the function on the new dataframe created above after filling the State names using fill
 
-plot_missing(df_new[, col])
-
 plot_missing(df_new[, col], percent = TRUE)
 ```
 
 From the plots above we can deduce that `Property Crime Total` and `Larceny-theft` have roughly the same percentage of missing rows. We can observe that there are 12 unique missing patterns. We also observe that about 90% of the data does not have any missing values in them. `Property Crime Total` and `Larceny-theft` contribute towards most of the missing values while other variables have relatively lower missing values. 
+
+## Missing Value Analysis for Education, Population and Election Dataset
+
+These three dataset did not had any missing values in them. 

@@ -1,3 +1,19 @@
 # Interactive component
 
+The below interactive graph shows the different type of vaccines that were administered over January 2021 to November 2021.
 
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v6.js"></script>
+        <link rel="stylesheet" href="resources/js/styles.css">
+    </head>
+    <body>
+    <select id="selected_state"> 
+        <option>Choose the state</option>
+    </select>
+    <svg width="700" height="400"></svg>
+    <script src="resources/js/line.js"></script>
+    </body>
+</html>
+
+>**NOTE:** The red line represent the number of Janssen vaccines received over time. The green line represents number of Moderna vaccines and finally the blue line represents the number of Pfizer vaccines administered.

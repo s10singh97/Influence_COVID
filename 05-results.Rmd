@@ -35,9 +35,9 @@ population <- population[,1:2] %>%
 ## Correlation between Vaccination, level of education, and the type of employment which is dominant in a state
 
 
-```{r, fig.height=14}
+```{r, fig.height=10}
 
-vaccine$Date = as.Date(vaccine$Date, format = "%m/%d/%y")
+vaccine$Date = as.Date(vaccine$Date, format = "%m/%d/%Y")
 
 df1 <- vaccine %>% 
   mutate(Date = format(Date, "%m/%y")) %>% 
@@ -49,7 +49,7 @@ ggplot(df1, aes(x = Distributed, y = reorder(Location, Distributed), color = Dat
 
 ```
 
-The above plot displays the number of vaccines distributed each month. It seems that the maximum number of vaccines were distributed in October, 2020, followed by Spetember 2020. Additionally, it is important to note that states with huge population like California and Texas received the maximum number of vaccines. Thus, we can conlcude that the vaccines were distributed as per the population of each state. States with higher population received more vaccines than states with less popualation.
+The above plot displays the number of vaccines distributed each month. It seems that the maximum number of vaccines were distributed in October, 2021, followed by Spetember 2021. Additionally, it is important to note that states with huge population like California and Texas received the maximum number of vaccines. Thus, we can conlcude that the vaccines were distributed as per the population of each state. States with higher population received more vaccines than states with less popualation.
 
 
 ```{r, fig.height=12, fig.show='hide'}
@@ -121,7 +121,7 @@ state_choropleth(pop_de1, title = "State Education Density (2019-20)", legend = 
 
 ```
 
-The above plot indicates the percentage of people educated in each state. We can see that the states of Texas, California, Colorado have the maximum literacy rate (between 40 to 55 percent) while some states such as Wyoming and Montana have the least literacy rate (between 6.5 to 12 percent).
+The above plot indicates the percentage of people educated in each state. We can see that the states of Texas, California, Colorado have the maximum literacy rate (between 30 to 55 percent) while some states such as Wyoming and Montana have the least literacy rate (between 6.5 to 12 percent).
 
 ```{r, fig.height=14, fig.width=14}
 
@@ -201,7 +201,7 @@ Therefore, from the plot above, we can analyze that as the percentage of educate
 
 Some interesting trend to note is that California and Texas both has a very large percentage of educated people but still California had a better Vaccination Density than Texas. While there are some other states as well such as Vermont and Maine where the percentage of educated people are very less but still they have a very high number of vaccine administration density.
 
-```{r, fig.height=8, fig.width=14}
+```{r, fig.height=10, fig.width=14}
 
 dm3 <- dm2 %>% 
   transmute(region = GeoName, Description)
