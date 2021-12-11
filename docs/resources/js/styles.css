@@ -1,17 +1,17 @@
 .line_janssen {
     fill: none;
     stroke: #f56e80;
-    stroke-width: 1.5px;
+    stroke-width: 4px;
 }
 
 .line_moderna {
     fill: none;
     stroke: rgb(108, 247, 143);
-    stroke-width: 1.5px;
+    stroke-width: 4px;
 }
 
 .line_pfizer {
     fill: none;
     stroke: rgb(124, 137, 255);
-    stroke-width: 1.5px;
+    stroke-width: 4px;
 }
