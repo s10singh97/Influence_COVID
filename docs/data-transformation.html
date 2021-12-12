@@ -122,7 +122,8 @@
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#correlation-between-vaccination-level-of-education-and-the-type-of-employment-which-is-dominant-in-a-state"><i class="fa fa-check"></i><b>5.1</b> Correlation between Vaccination, level of education, and the type of employment which is dominant in a state</a></li>
-<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#correlation-between-wastage-of-vaccinates-and-the-type-of-local-elected-party-in-a-state"><i class="fa fa-check"></i><b>5.2</b> Correlation between Wastage of Vaccinates, and the type of local elected party in a state</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#correlation-between-vaccinations-being-administered-and-the-number-of-crimes-in-each-state"><i class="fa fa-check"></i><b>5.2</b> Correlation between vaccinations being administered and the number of crimes in each state</a></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#correlation-between-wastage-of-vaccinates-and-the-type-of-local-elected-party-in-a-state"><i class="fa fa-check"></i><b>5.3</b> Correlation between Wastage of Vaccinates, and the type of local elected party in a state</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -182,6 +183,16 @@
 </div>
 <div id="transformations-for-crime-dataset" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Transformations for Crime Dataset</h2>
+<ol style="list-style-type: decimal">
+<li>The first few rows of the dataset did not have any data in them and so these rows were discarded.</li>
+<li>The last few rows of the dataset included description of the dataset so the same had to be removed.</li>
+<li>There were some states and column names which had a number in their superscript. We discarded the numbers from such instances and replaced such entries with their actual names.</li>
+<li>Majority of the rows did not have any state value associated with them. For instance, if one row had Alabama associated with it, all the following rows before the name of the next state appeared had the state name missing from it. So we filled these missing values for each row with the appropriate state name.</li>
+<li>All other columns such as Aggravated Assault, Burglary etc having missing values were simply replaced with 0.</li>
+<li>Each column which had numeric values but was of character type was converted to numeric form.</li>
+<li>On grouping the data by each State, we realized that one row still had a missing State name. On closer analysis, we realized that the cities associated belonged to the state Michigan and so we replaced such missing instances with Michigan.</li>
+<li>Joined the crime data with the vaccination data on the column name “region” which denoted the states.</li>
+</ol>
 </div>
 <div id="transformations-for-election-dataset" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Transformations for Election Dataset</h2>

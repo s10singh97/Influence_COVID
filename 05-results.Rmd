@@ -229,6 +229,168 @@ Additionally, state of New Hampshire, where the dominant profession is Retail Tr
 
 The graph on the right indicate the number of states that have a particular kind of maximum employment areas historically. This shows that maximum states in US have been historically employing people in government enterprises. Thus, these states should have been better in terms of vaccination. But as we can see from the graph on the left, people from these area of employment have not been quite enthusiastic about the vaccination drive in some states.
 
+## Correlation between vaccinations being administered and the number of crimes in each state 
+
+```{r}
+df <- read_excel("resources/data/Crime.xlsx", sheet = '20tbl08') 
+
+df <- data.frame(df)
+
+# Removing the rows from above 
+
+df <- slice(df, -c(1, 2, 3, 4))
+
+# Excluding the description present in the last few rows
+
+df <- df[1:7690,]
+
+# Correcting the names of States and Column names
+
+df[2,1] <- 'Alabama'
+df[1287,1] <- 'Georgia'
+df[1484,1] <- 'Illinois'
+df[2582,1] <- 'Maryland'
+df[5888,1] <- 'Pennsylvania'
+df[1,6] <- 'Rape'
+df[1,13] <- 'Arson'
+
+#Renaming the column names
+
+colnames(df) <- c(df[1,1],df[1,2],df[1,3],df[1,4],df[1,5],df[1,6],df[1,7],df[1,8],df[1,9],df[1,10],df[1,11],df[1,12],df[1,13])
+
+#Removing the first row
+
+df <- slice(df, -c(1))
+
+```
+
+```{r}
+
+#Replacing NA values with the State name using fill from tidyr
+
+df_new <- df %>% fill(State)
+
+# Replacing all NA values with 0
+
+df_new[is.na(df_new)] = 0
+```
+
+```{r}
+
+# Converting each column having numeric value from character to numeric form
+
+df_new$Population <- as.numeric(df_new$Population)
+df_new$`Violent Crime Total` <- as.numeric(df_new$`Violent Crime Total`)
+df_new$`Murder and nonnegligent manslaughter` <- as.numeric(df_new$`Murder and nonnegligent manslaughter`)
+df_new$Rape <- as.numeric(df_new$Rape)
+df_new$Robbery <- as.numeric(df_new$Robbery)
+df_new$`Aggravated assault` <- as.numeric(df_new$`Aggravated assault`)
+df_new$`Property Crime Total` <- as.numeric(df_new$`Property Crime Total`)
+df_new$`Burglary` <- as.numeric(df_new$`Burglary`)
+df_new$`Larceny-theft` <- as.numeric(df_new$`Larceny-theft`)
+df_new$`Motor vehicle theft` <- as.numeric(df_new$`Motor vehicle theft`)
+df_new$`Arson` <- as.numeric(df_new$`Arson`)
+
+# Adding a new column which indicates the total number of crimes of each state
+
+df_new['Crime Total'] = df_new['Violent Crime Total'] + df_new['Property Crime Total']
+
+```
+
+```{r}
+
+df_new_1 <- df_new %>%
+  group_by(State)  %>%
+  summarize( 
+             Murder_and_nonnegligent_manslaughter = sum(`Murder and nonnegligent manslaughter`),
+             Rape_ = sum(Rape),
+             Robbery_ = sum(Robbery),
+             Aggravated_assault = sum(`Aggravated assault`),
+             Burglary_ = sum(Burglary),
+             `Larceny-theft_` = sum(`Larceny-theft`),
+             Motor_vehicle_theft = sum(`Motor vehicle theft`),
+             Arson_ = sum(Arson),
+             Crime_Total = sum(`Crime Total`))
+```
+
+
+```{r}
+# Some values for state Michigan were missing from the State column of the dataset. So we replace those NA values with Michigan
+
+df_new_1$State[df_new_1$State == ""] <- 'Michigan'
+
+```
+
+```{r}
+df_new_2 <- df_new_1 %>%
+  group_by(State)  %>%
+  summarize( 
+             Murder_and_nonnegligent_manslaughter = sum(`Murder_and_nonnegligent_manslaughter`),
+             Rape_ = sum(Rape_),
+             Robbery_ = sum(Robbery_),
+             Aggravated_assault = sum(`Aggravated_assault`),
+             Burglary_ = sum(Burglary_),
+             `Larceny-theft_` = sum(`Larceny-theft_`),
+             Motor_vehicle_theft = sum(Motor_vehicle_theft),
+             Arson_ = sum(Arson_),
+             Crime_Total = sum(`Crime_Total`))
+
+```
+
+
+```{r}
+
+dd <- as.data.frame(df_new_2)
+
+a <- dd %>% 
+  mutate(max_ind = max.col(dd[,2:9])) %>% 
+  mutate(dominant_crime = names(dd)[max_ind+1])
+```
+
+```{r}
+cl <- ggplot(a, aes(x = a$Crime_Total, y = reorder(a$State, a$Crime_Total),  color = a$dominant_crime)) + 
+  geom_point() + 
+  ylab("State") + 
+  xlab("Total Crime Count") +
+  labs( color = "Dominant Crime")
+
+cl + scale_color_manual(labels = c("Aggravated Assault", "Larceny Theft"), values = c("#D6604D","#4393C3"))
+```
+
+From the above graph, we can observe that majority of the US states had total number of crimes reported to be lower than 125000. A few states like Florida, New York, Texas and California had reported crimes higher than 250000 crimes with California reporting the highest number of crimes ( roughly 850000 ). Maryland, Pennsylvania, Alabama, Vermont and Wyoming have lower incidence of total reported crimes. Except Illinois, all the states have Larceny Theft as the dominant crime in them. Illinois had Aggravated Assault as the Dominant Crime. 
+
+
+```{r}
+dc <- a %>% 
+  mutate(region = State)
+
+dc_vac <- full_join(dc, vac_edu, by = "region")
+dc_vac <- dc_vac %>% filter(region %in% state.name)
+
+# We don't have official crime data for Hawai in the dataset and so we exclude that from our analysis
+
+dc_vac <- dc_vac[1:49,]
+```
+
+
+```{r}
+c1 <- ggplot(dc_vac, aes(y = density , x = Crime_Total)) + geom_point(alpha = 0.5) + geom_text_repel(aes(label = ifelse(Crime_Total > 160000, State, ""))) + geom_smooth(method = "lm", se = FALSE) + labs(x = NULL, y = NULL) 
+```
+
+```{r}
+c2 <- ggplot(dc_vac, aes(y = density , x = Crime_Total)) + geom_point(alpha = 0.5) + geom_text_repel(aes(label = ifelse(Crime_Total < 60000, State, ""))) + geom_smooth(method = "lm", se = FALSE) + labs(x = NULL, y = NULL)
+```
+
+
+```{r}
+c_plot = c1/c2  
+c_plot_2 <- patchwork::patchworkGrob(c_plot)
+gridExtra::grid.arrange(c_plot_2, left = "Vaccines Administered/Population", bottom = "Total Crimes", heights=c(16,0.5), widths=c(8,1))
+```
+
+We try to observe a correlation between the vaccinations administered per unit population and the crimes reported in each states. From the plot above, we observe that states having lower reported crimes (less than 80000) have relatively higher vaccinations administered per unit population compared to the states having higher reported crimes. Few states with extremely low crime rates like Idaho and Alabama have extremely low vaccinations administered per unit population and states like Vermont, Maine and Connecticut have very high vaccinations administered per unit population. Even though California has the highest number of crimes reported, it still has a reasonable amount of vaccinations being administered per unit population. 
+
+
 ## Correlation between Wastage of Vaccinates, and the type of local elected party in a state
 
 ```{r}

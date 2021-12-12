@@ -28,6 +28,15 @@
 
 ## Transformations for Crime Dataset
 
+1. The first few rows of the dataset did not have any data in them and so these rows were discarded.
+2. The last few rows of the dataset included description of the dataset so the same had to be removed.
+3. There were some states and column names which had a number in their superscript. We discarded the numbers from such instances and replaced such entries with their actual names.
+4. Majority of the rows did not have any state value associated with them. For instance, if one row had Alabama associated with it, all the following rows before the name of the next state appeared had the state name missing from it. So we filled these missing values for each row with the appropriate state name.
+5. All other columns such as Aggravated Assault, Burglary etc having missing values were simply replaced with 0.
+6. Each column which had numeric values but was of character type was converted to numeric form.
+7. On grouping the data by each State, we realized that one row still had a missing State name. On closer analysis, we realized that the cities associated belonged to the state Michigan and so we replaced such missing instances with Michigan.
+8. Joined the crime data with the vaccination data on the column name "region" which denoted the states.
+
 ## Transformations for Election Dataset
 
 1. Changed the column names to match with vaccination dataset so as to join them along the common column "region" which denoted the states.
