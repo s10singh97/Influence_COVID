@@ -78,11 +78,13 @@ ggplot(df3) +
 
 ```
 
-```{r, fig.show='hide'}
+```{r}
 
 ggplot(df3, aes(x = Distributed, y = Administered)) + geom_hex(bins = 20, color = 'black') + scale_fill_gradient(low = 'lightyellow', high = 'blue')
 
 ```
+
+If we look at a larger picture considering the nationwide vaccine administration and distribution, we can see that the number of vaccines administered is directly proportional to the number of vaccines distributed. Additionally, maximum count where number of vaccines distributed are approximately equal to number of vaccines administered (which is one of the indicator for less vaccine wastage) is only valid in lower ranges of vaccine distributed/administered. While on the higher ranges we can see a considerable deviation wherein number of vaccine distributed differ significantly with the number of vaccine administered.
 
 ```{r, fig.width=14, fig.show='hide'}
 
@@ -91,13 +93,13 @@ ggplot(df2, aes(x = Amount_Administered, fill = Type)) +
 
 ```
 
-```{r, fig.show='hide'}
+```{r}
 
-ggplot(df2, aes(x = Amount_Administered, y = Type, fill = Type)) + geom_density_ridges(scale = 1, alpha = 0.5)
+ggplot(df2, aes(x = Amount_Administered, y = Type, fill = Type)) + geom_density_ridges(scale = 1, alpha = 0.5) + xlab("Vaccine Administered") + ylab(NULL)
 
 ```
 
-
+Through the above plot we wanted to understand the inherent distribution pattern of administered vaccines. As it is evident plot, Janssen had almost a perfectly normally distributed pattern but has less number of total vaccines administered than Moderna and Pfizer. Moderna and Pfizer have a more larger span on the number of vaccine administered. Therefore, this gives us a fair idea that more people tended to prefer Pfizer and Moderna over Janssen. Additionally, an initial peak in Janssen signifies that when Moderna and Pfizer were not present in decent amounts people took whatever other alternative was present in the market (i.e. Janssen).
 
 ```{r}
 
