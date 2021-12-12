@@ -38,11 +38,22 @@ d3.csv("https://raw.githubusercontent.com/s10singh97/Influence_COVID/main/resour
 
     $('select').on('change', function (e) {
       
+      d3.selectAll("circle").remove()
+      d3.selectAll("text").remove()
+
       d3.select("g").remove();
       var svg = d3.select("svg")
       var g = svg.append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
       var width =  +svg.attr("width") - margin.left - margin.right;
       var height = +svg.attr("height") - margin.top - margin.bottom;
+
+      svg.append("circle").attr("cx",180).attr("cy",40).attr("r", 6).style("fill", "#f56e80")
+      svg.append("circle").attr("cx",180).attr("cy",70).attr("r", 6).style("fill", "rgb(108, 247, 143)")
+      svg.append("circle").attr("cx",180).attr("cy",100).attr("r", 6).style("fill", "rgb(124, 137, 255)")
+      svg.append("text").attr("x", 200).attr("y", 40).text("Janssen").style("font-size", "15px").attr("alignment-baseline","middle")
+      svg.append("text").attr("x", 200).attr("y", 70).text("Moderna").style("font-size", "15px").attr("alignment-baseline","middle")
+      svg.append("text").attr("x", 200).attr("y", 100).text("Pfizer").style("font-size", "15px").attr("alignment-baseline","middle")
+
 
       var optionSelected = $("option:selected", this);
       input = this.value;
@@ -53,15 +64,17 @@ d3.csv("https://raw.githubusercontent.com/s10singh97/Influence_COVID/main/resour
       state_rows = arr.filter(function(item){
         return item.Location == input_code;
       });
-  
+      
+      var xlab = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'];
+
       var xScale = d3.scaleTime().range([0, width]);
       var yScale = d3.scaleLinear() 
         .range([height, 0]);
 
-      var yAxis = d3.axisLeft().scale(yScale).ticks(10);
+      // var yAxis = d3.axisLeft().scale(yScale).ticks(10);
 
       xScale
-        .domain(d3.extent(state_rows, d => d.Date));
+        .domain(d3.extent(state_rows, d => d.Date))
       yScale
         .domain(d3.extent(state_rows, d => Math.max(d.Administered_Janssen, d.Administered_Moderna, d.Administered_Pfizer)));
 
