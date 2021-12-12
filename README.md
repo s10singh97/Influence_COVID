@@ -22,7 +22,7 @@ c. [Educational Attainment in the United States (US Census Bureau)](https://www.
 
 d. [Bureau of Economic Analysis (BEA)](https://apps.bea.gov/regional/downloadzip.cfm)
 
-e. [History of Local Elected State Party (MIT Election Data + Science Lab/Harvard Dataverse)](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU)
+e. [History of Local Elected State Party Dataset](https://www.openicpsr.org/openicpsr/project/102000/version/V3/view)
 
 
 <br><br>
