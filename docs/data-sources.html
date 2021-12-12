@@ -122,6 +122,7 @@
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#correlation-between-vaccination-level-of-education-and-the-type-of-employment-which-is-dominant-in-a-state"><i class="fa fa-check"></i><b>5.1</b> Correlation between Vaccination, level of education, and the type of employment which is dominant in a state</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#correlation-between-wastage-of-vaccinates-and-the-type-of-local-elected-party-in-a-state"><i class="fa fa-check"></i><b>5.2</b> Correlation between Wastage of Vaccinates, and the type of local elected party in a state</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -184,10 +185,10 @@
 </div>
 <div id="election-dataset" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Election Dataset</h2>
-<p><strong>Link:</strong> <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU">History of Local Elected State Party Dataset</a></p>
-<p><strong>Overall Description:</strong> This dataset is downloaded from Harvard Dataverse website. It contains historical state election results and details of prty which won and the candidate who got elected along with the total number of votes casted in that election. This dataset contains a total of 19 columns and 3629 observations.</p>
-<p><strong>Name of Columns:</strong> year, state, state_po, state_fips, state_cen, state_ic, office, district, stage, special, candidate, party_detailed, writein, mode, candidatevotes, totalvotes, unofficial, version, party_simplified.</p>
-<p><strong>Column Description:</strong> <code>year</code>, <code>candidatevote</code> and <code>totalvotes</code> are numerical in nature while all other columns contains categorical values.</p>
+<p><strong>Link:</strong> <a href="https://www.openicpsr.org/openicpsr/project/102000/version/V3/view">Local Elected State Party Dataset</a></p>
+<p><strong>Overall Description:</strong> The dataset found above is restricted and can be accessed only though certain credentials. After going thourhg the description of the dataset we found the original source (<a href="https://www.nga.org/bestpractices/homeland-security/" class="uri">https://www.nga.org/bestpractices/homeland-security/</a>) from where the dataset was curated. We then manually created the dataset by looking up the governor for every state and extracting the necessary information required for analysis purposes.</p>
+<p><strong>Name of Columns:</strong> Office, Name, Party, Date assumed office.</p>
+<p><strong>Column Description:</strong> <code>Office</code>, column describes the state <code>Name</code> gives the details about the name of the governor and <code>Party</code> states the political party to which the governor belongs to and <code>Date assumed office</code> states the date on which the governor was elected.</p>
 
 </div>
 </div>
@@ -251,6 +252,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

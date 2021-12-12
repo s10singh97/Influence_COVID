@@ -29,3 +29,6 @@
 ## Transformations for Crime Dataset
 
 ## Transformations for Election Dataset
+
+1. Changed the column names to match with vaccination dataset so as to join them along the common column "region" which denoted the states.
+2. Defined a metric based on the vaccination, population and the election dataset and appended its new column in the dataset.

@@ -32,5 +32,6 @@ missing-value-patterns-plot-analysis
 missing-value-analysis-for-education-population-and-election-dataset
 results
 correlation-between-vaccination-level-of-education-and-the-type-of-employment-which-is-dominant-in-a-state
+correlation-between-wastage-of-vaccinates-and-the-type-of-local-elected-party-in-a-state
 interactive-component
 conclusion

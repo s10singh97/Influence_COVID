@@ -54,10 +54,10 @@ We have used 6 different datsets in this project. Since we wanted to see how dif
 
 ## Election Dataset
 
-**Link:** [History of Local Elected State Party Dataset](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU)
+**Link:** [Local Elected State Party Dataset](https://www.openicpsr.org/openicpsr/project/102000/version/V3/view)
 
-**Overall Description:** This dataset is downloaded from Harvard Dataverse website. It contains historical state election results and details of prty which won and the candidate who got elected along with the total number of votes casted in that election. This dataset contains a total of 19 columns and 3629 observations.
+**Overall Description:** The dataset found above is restricted and can be accessed only though certain credentials. After going thourhg the description of the dataset we found the original source (https://www.nga.org/bestpractices/homeland-security/) from where the dataset was curated. We then manually created the dataset by looking up the governor for every state and extracting the necessary information required for analysis purposes.
 
-**Name of Columns:** year, state, state_po, state_fips, state_cen, state_ic, office, district, stage, special, candidate, party_detailed, writein, mode, candidatevotes, totalvotes, unofficial, version, party_simplified.
+**Name of Columns:** Office,	Name,	Party,	Date assumed office.
 
-**Column Description:** `year`, `candidatevote` and `totalvotes` are numerical in nature while all other columns contains categorical values.
+**Column Description:** `Office`, column describes the state `Name` gives the details about the name of the governor and `Party` states the political party to which the governor belongs to and `Date assumed office` states the date on which the governor was elected.

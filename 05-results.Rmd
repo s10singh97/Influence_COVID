@@ -228,3 +228,84 @@ The above plot on the left displays the number of Vaccination Density (vaccines 
 Additionally, state of New Hampshire, where the dominant profession is Retail Trade also shows a good percentage of people having vaccinated. Some states like Alabama and Mississippi have the lowest vaccination density even when the primary profession of people in those states is a government job. This indicates that government of these states should focus more on the vaccination drive. Nevada being a heavy employer in accommodation services is doing good but can definitely work on it's vaccination program to get more people vaccinated.
 
 The graph on the right indicate the number of states that have a particular kind of maximum employment areas historically. This shows that maximum states in US have been historically employing people in government enterprises. Thus, these states should have been better in terms of vaccination. But as we can see from the graph on the left, people from these area of employment have not been quite enthusiastic about the vaccination drive in some states.
+
+## Correlation between Wastage of Vaccinates, and the type of local elected party in a state
+
+```{r}
+governor <- read.csv("resources/data/governors.csv")
+colnames(governor)[1] <- "region"
+```
+
+
+```{r, fig.show='hide'}
+vaccine$Wastage_Total = vaccine$Distributed - vaccine$Administered
+vaccine$Wastage_Janssen = vaccine$Distributed_Janssen - vaccine$Administered_Janssen
+vaccine$Wastage_Moderna = vaccine$Distributed_Moderna - vaccine$Administered_Moderna
+vaccine$Wastage_Pfizer = vaccine$Distributed_Pfizer - vaccine$Administered_Pfizer
+
+df1 <- vaccine %>%
+  mutate(Date = format(Date, "%m/%y")) %>% 
+  group_by(Location, Date) %>% 
+  summarise_at(vars(-MMWR_week), sum) %>% 
+  filter(Location != 'US' & Location %in% state.abb)
+
+ggplot(df1, aes(x = Wastage_Total, y = reorder(Location, Wastage_Total), color = Date)) + geom_point() + ylab("Location")
+```
+
+```{r}
+df2 <- df1 %>%
+  group_by(Location) %>%
+  summarise_at(vars(-Date), sum) %>%
+  select(Location, Wastage_Total, Wastage_Janssen, Wastage_Moderna, Wastage_Pfizer) %>%
+  filter(Location %in% state.abb) %>%
+  mutate(Location = state.name[match(Location, state.abb)]) %>% 
+  transmute(region = Location, Wastage_Total, Wastage_Janssen, Wastage_Moderna, Wastage_Pfizer)
+```
+
+
+```{r}
+vac_pop <- full_join(df2, population, by = "region")
+vac_gov <- full_join(vac_pop, governor, by = "region")
+```
+
+
+```{r}
+vac_gov <- vac_gov %>%
+  mutate(pop = as.numeric(pop)) %>%
+  mutate(wastage_per_pop = Wastage_Total/pop) %>%
+  
+  # Divide by individual distributed se karna chahiye?
+  mutate(wastage_per_pop_jan = Wastage_Janssen/pop) %>%
+  mutate(wastage_per_pop_mdr = Wastage_Moderna/pop) %>%
+  mutate(wastage_per_pop_pfe = Wastage_Pfizer/pop)
+```
+
+
+```{r, fig.height = 8}
+vac_gov %>%
+  mutate(region = fct_reorder(region, wastage_per_pop, .desc = FALSE)) %>%
+  ggplot(aes(x = wastage_per_pop, y = region)) + 
+  geom_point() + 
+  facet_wrap(~Party, ncol = 1, scales = "free") + xlab("Density of Difference between Distributed and Administered Vaccines") + ylab("Sate")
+```
+
+The main motive behind answering this question is to relate the vaccine wastage in a particular state. As the exact details about vaccine wastage is not released by the government, we try to define a metric which can capture the vaccine wastage in a particular state across united states. The vaccination dataset available for public usage lists two columns namely "Administered Vaccine doses" and "Distributed Vaccine Doses". This two columns represent the amount of vaccine distributed to a state on a particular and the amount of vaccine used by the state on a particular date.
+
+We take the difference between this two values to arrive at an approximate metric which denotes as to how much vaccine was actually given to the public on the given day. To normalize the results along different states, We divide this difference with the population of a particular state. Hence the final metric is defined as follows:
+
+$$
+Metric = \frac{( Administered - Distributed )}{State Population}
+$$
+
+The above graph then shows which state has the highest value of the metric faceted along with the political party ruling that state during the vaccination period. As we can see the value of the metric is significantly higher for states with republican ruling party (In the range of 30 - 110). On the other hand the value of the metric is spread out and significantly lower for states with democratic ruling party (In the range of 15 - 70). States ruled by Democratic party governor can be considered one of the factor contributing to the lower number of vaccine wastage on a particular day.
+
+Also for states with higher number of successful vaccination per population such as Vermont, Connecticut and Massachusetts have a lower value of metric indication that the states with large number of population vaccination also has vaccine wastage on a lower side. 
+
+```{r, fig.show = 'hide'}
+vac_gov %>%
+  mutate(region = fct_reorder(region, wastage_per_pop_jan, .desc = FALSE)) %>%
+  ggplot(aes(x = region, y = wastage_per_pop_jan)) + 
+  geom_col(fill="lightblue", color="black") +
+  facet_wrap(~ Party, ncol=1, scales = "free") +
+  coord_flip()
+```  
