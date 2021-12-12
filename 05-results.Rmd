@@ -453,15 +453,15 @@ vac_gov %>%
   facet_wrap(~Party, ncol = 1, scales = "free") + xlab("Density of Difference between Distributed and Administered Vaccines") + ylab("Sate")
 ```
 
-The main motive behind answering this question is to relate the vaccine wastage in a particular state. As the exact details about vaccine wastage has not been released by the government, we try to define a metric which can capture the vaccine wastage in a particular state across the United States. The vaccination dataset available for public usage lists two columns namely "Administered Vaccine doses" and "Distributed Vaccine Doses". This two columns represent the amount of vaccine distributed to a state on a particular and the amount of vaccine used by the state on a particular date.
+The main motive behind answering this question is to relate the vaccine wastage in a particular state. As the exact details about vaccine wastage has not been released by the government, we try to define a metric which can capture the vaccine wastage in a particular state across the United States. The vaccination dataset available for public usage lists two columns namely "Administered Vaccine doses" and "Distributed Vaccine Doses". These two columns represent the amount of vaccine distributed to a state on a particular date and the amount of vaccine used by the state on a particular date.
 
-We take the difference between this two values to arrive at an approximate metric which denotes as to how much vaccine was actually given to the public on the given day. To normalize the results along different states, We divide this difference with the population of a particular state. Hence, the final metric is defined as follows:
+We take the difference between these two values to arrive at an approximate metric which denotes as to how much vaccine was actually given to the public on the given day. To normalize the results along different states, we divide this difference with the population of a particular state. Hence, the final metric is defined as follows:
 
 $$
 Metric = \frac{( Administered - Distributed )}{State Population}
 $$
 
-The above graph then shows which state has the highest value of the metric faceted along with the political party ruling that state during the vaccination period. As we can see the value of the metric is significantly higher for states with republican ruling party (In the range of 30 - 110). On the other hand the value of the metric is spread out and significantly lower for states with democratic ruling party (In the range of 15 - 70). States ruled by Democratic party governor can be considered to be one of the factors contributing to the lower incidence of vaccine wastage on a particular day.
+The above graph then shows which state has the highest value of the metric faceted along with the political party ruling that state during the vaccination period. As we can see the value of the metric is significantly higher for states with republican ruling party (in the range of 30 - 110). On the other hand, the value of the metric is spread out and significantly lower for states with democratic ruling party (in the range of 15 - 70). States ruled by Democratic party governor can be considered to be one of the factors contributing to the lower incidence of vaccine wastage on a particular day.
 
 Also, states with higher vaccination density (vaccination per unit population) such as Vermont, Connecticut and Massachusetts have a lower value of metric indicating that the states with higher vaccination density also have vaccine wastage on a lower side. 
 

@@ -130,6 +130,7 @@
 <ul>
 <li class="chapter" data-level="7.1" data-path="conclusion.html"><a href="conclusion.html#limitations"><i class="fa fa-check"></i><b>7.1</b> Limitations</a></li>
 <li class="chapter" data-level="7.2" data-path="conclusion.html"><a href="conclusion.html#scope-of-future-work"><i class="fa fa-check"></i><b>7.2</b> Scope of Future Work</a></li>
+<li class="chapter" data-level="7.3" data-path="conclusion.html"><a href="conclusion.html#lessons-learned"><i class="fa fa-check"></i><b>7.3</b> Lessons Learned</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -165,7 +166,7 @@
 <ol style="list-style-type: decimal">
 <li>Converted character data into numerical datatype for the <code>value</code> column by type casting.</li>
 <li>Filtered rows to not contain any cumulative indicators such as ‘United States’.</li>
-<li>Grouped by each state and allowed and allowed ‘NA’ values in the <code>value</code> column to be considered as 0 using na.rm = True while summarizing the data after grouping.</li>
+<li>Grouped by each state and allowed ‘NA’ values in the <code>value</code> column to be considered as 0 using na.rm = True while summarizing the data after grouping.</li>
 <li>Performed a full join operation with population dataset on the <code>state</code> column to further normalize the <code>value</code> column of the education dataset by the population of each state to get a normalized education density of each state.</li>
 </ol>
 </div>
@@ -175,7 +176,7 @@
 <li>Filtered dataset to not contain any cumulative indicators such as ‘United States’ since we are doing a state-wise analysis.</li>
 <li>All character columns containing numerical values were converted to numercial datatype.</li>
 <li>Another column named <code>Total</code> was introduced which contained the sum of the rows containing any numerical value. This column indicated the sum of historical employment data.</li>
-<li>Some values that did not give any insight in the <code>Description</code> column was filtered out as well. This included “Total employment (number of jobs)”, “Nonfarm employment”, “Private nonfarm employment”, “Wage and salary employment”, “Proprietors employment”, “Nonfarm proprietors employment 2/”. As these all values already had more specific sub-categories, keeping these values did not provided any advantage.</li>
+<li>Some values that did not give any insight in the <code>Description</code> column were filtered out as well. This included “Total employment (number of jobs)”, “Nonfarm employment”, “Private nonfarm employment”, “Wage and salary employment”, “Proprietors employment”, “Nonfarm proprietors employment 2/”. As these values already had more specific sub-categories, keeping these values did not provide any advantage.</li>
 </ol>
 </div>
 <div id="transformations-for-population-dataset" class="section level2" number="3.4">

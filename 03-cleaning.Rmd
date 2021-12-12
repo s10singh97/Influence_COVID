@@ -11,7 +11,7 @@
 
 1. Converted character data into numerical datatype for the `value` column by type casting.
 2. Filtered rows to not contain any cumulative indicators such as 'United States'.
-3. Grouped by each state and allowed and allowed 'NA' values in the `value` column to be considered as 0 using na.rm = True while summarizing the data after grouping.
+3. Grouped by each state and allowed 'NA' values in the `value` column to be considered as 0 using na.rm = True while summarizing the data after grouping.
 4. Performed a full join operation with population dataset on the `state` column to further normalize the `value` column of the education dataset by the population of each state to get a normalized education density of each state.
 
 ## Transformations for Employment Dataset
@@ -19,7 +19,7 @@
 1. Filtered dataset to not contain any cumulative indicators such as 'United States' since we are doing a state-wise analysis.
 2. All character columns containing numerical values were converted to numercial datatype.
 3. Another column named `Total` was introduced which contained the sum of the rows containing any numerical value. This column indicated the sum of historical employment data.
-4. Some values that did not give any insight in the `Description` column was filtered out as well. This included "Total employment (number of jobs)", "Nonfarm employment", "Private nonfarm employment", "Wage and salary employment", "Proprietors employment", "Nonfarm proprietors employment 2/". As these all values already had more specific sub-categories, keeping these values did not provided any advantage.
+4. Some values that did not give any insight in the `Description` column were filtered out as well. This included "Total employment (number of jobs)", "Nonfarm employment", "Private nonfarm employment", "Wage and salary employment", "Proprietors employment", "Nonfarm proprietors employment 2/". As these values already had more specific sub-categories, keeping these values did not provide any advantage.
 
 ## Transformations for Population Dataset
 

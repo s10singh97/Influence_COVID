@@ -1,12 +1,12 @@
 # Data sources
 
-We have used 6 different datsets in this project. Since we wanted to see how different things correlate with each other (e.g. vaccination status and education level), therefore,  we chose multiple dataset to get multiple factors into consideration before concluding a result. All datasets have been downloaded from original data source.
+We have used 6 different datsets in this project. Since we wanted to see how different things correlate with each other (e.g. vaccination status and education level), therefore, we chose multiple datasets to get multiple factors into consideration before concluding a result. All datasets have been downloaded from their original data sources.
 
 ## Vaccination Dataset
 
 **Link:** [CDC Vaccination Dataset](https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc/data)
 
-**Overall Description:** This dataset has been downloaded from Center of Disease Control (CDC) website. It contains details of the vaccination for each state over a period of time. It also contains additional details on number of different kind of vaccines administered, distributed both state wise and age wise. In total this dataset has 69 columns with 21528 observations.
+**Overall Description:** This dataset has been downloaded from the Centers for Disease Control and Prevention (CDC) website. It contains details of the vaccination for each state over a period of time. It also contains additional details regarding the number of different kind of vaccines administered and distributed both state-wise and age-wise. In total, this dataset has 69 columns with 21528 observations.
 
 **Name of Columns:** Data, MMWR_week, Location, Distributed, Distributed_Janssen, Distributed_Moderna, Distributed_Pfizer, Distributed_Unk_Manuf, Dist_Per_100K, Distributed_Per_100k_12Plus, Distributed_Per_100k_18Plus, Distributed_Per_100k_65Plus, Administered, Administered_12Plus, Administered_18Plus, Administered_65Plus, Administered_Janssen, Administered_Moderna, Administered_Pfizer, Administered_Unk_Manuf, Admin_Per_100K, Admin_Per_100k_12Plus, Admin_Per_100k_18Plus, Admin_Per_100k_65Plus, Recip_Administered, Administered_Dose1_Recip, Administered_Dose1_Pop_Pct, Administered_Dose1_Recip_12Plus, Administered_Dose1_Recip_12PlusPop_Pct, Administered_Dose1_Recip_18Plus, Administered_Dose1_Recip_18PlusPop_Pct, Administered_Dose1_Recip_65Plus, Administered_Dose1_Recip_65PlusPop_Pct, Series_Complete_Yes, Series_Complete_Pop_Pct, Series_Complete_12Plus, Series_Complete_12PlusPop_Pct, Series_Complete_18Plus, Series_Complete_18PlusPop_Pct, Series_Complete_65Plus, Series_Complete_65PlusPop_Pct, Series_Complete_Janssen, Series_Complete_Moderna, Series_Complete_Pfizer, Series_Complete_Unk_Manuf, Series_Complete_Janssen_12Plus, Series_Complete_Moderna_12Plus, Series_Complete_Pfizer_12Plus, Series_Complete_Unk_Manuf_12Plus, Series_Complete_Janssen_18Plus, Series_Complete_Moderna_18Plus, Series_Complete_Pfizer_18Plus, Series_Complete_Unk_Manuf_18Plus, Series_Complete_Janssen_65Plus, Series_Complete_Moderna_65Plus, Series_Complete_Pfizer_65Plus, Series_Complete_Unk_Manuf_65Plus, Additional_Doses, Additional_Doses_Vax_Pct, Additional_Doses_18Plus, Additional_Doses_18Plus_Vax_Pct, Additional_Doses_50Plus, Additional_Doses_50Plus_Vax_Pct, Additional_Doses_65Plus, Additional_Doses_65Plus_Vax_Pct, Additional_Doses_Moderna, Additional_Doses_Pfizer, Additional_Doses_Janssen, Additional_Doses_Unk_Manuf.
 
@@ -16,21 +16,21 @@ We have used 6 different datsets in this project. Since we wanted to see how dif
 
 **Link:** [Statewise GDP - Annual (BEA) Dataset](https://apps.bea.gov/regional/downloadzip.cfm)
 
-**Overall Description:** This dataset has been downloaded from Bureau of Economic Analysis (US Department of Commerce) and contains the historical Employment statistics of the US from 1998 to 2020. This will help us in correlating the overall employment trend of each state with various other dataset. It contains a total of 31 columns with 7084 observations.
+**Overall Description:** This dataset has been downloaded from the Bureau of Economic Analysis (US Department of Commerce) and contains the historical Employment statistics of the US from 1998 to 2020. This will help us in correlating the overall employment trend of each state with various other datasets. It contains a total of 31 columns with 7084 observations.
 
 **Name of Columns:** GeoFIPS, GeoName, Region, TableName, LineCode, IndustryClassification, Description, Unit, X1998, X1999, X2000, X2001, X2002, X2003, X2004, X2005, X2006, X2007, X2008, X2009, X2010, X2011, X2012, X2013, X2014, X2015, X2016, X2017, X2018, X2019, X2020.
 
-**Column Description:** The columns `X1998 to X2020`, `GeoFIPS`, `LineCode` contain numerical values. While columns `GeoName`, `TableName`, `IndustryClassification`, `Descripition` contain categorical values.
+**Column Description:** The columns `X1998 to X2020`, `GeoFIPS`, `LineCode` contain numerical values while the columns `GeoName`, `TableName`, `IndustryClassification`, `Descripition` contain categorical values.
 
 ## Education Dataset
 
 **Link:** [Education (Department of Education) Dataset](https://eddataexpress.ed.gov/download)
 
-**Overall Description:** Downloaded from US Department of Education website, this dataset contains the different type of students and their count in number for each state in which they received their education. It also contains the type of program they were enrolled in and along with different sub-categories of each program type. It contains 12 columns with 513721 observations.
+**Overall Description:** Downloaded from the US Department of Education website, this dataset contains the different type of students and their count in number for each state in which they received their education. It also contains the type of program they were enrolled in along with different sub-categories of each program type. It contains 12 columns with 513721 observations.
 
 **Name of Columns:** School.Year, State, NCES.LEA.ID, LEA, Data.Group, Data.Description, Value, Population, Category, Sub.Category, Grade.Level, Program.Type.
 
-**Column Description:** The only numerical column in `value` column, rest all other are categorical in nature.
+**Column Description:** The only numerical column is the `value` column, rest all other are categorical in nature.
 
 ## Population Dataset
 
@@ -56,8 +56,8 @@ We have used 6 different datsets in this project. Since we wanted to see how dif
 
 **Link:** [Local Elected State Party Dataset](https://www.openicpsr.org/openicpsr/project/102000/version/V3/view)
 
-**Overall Description:** The dataset found above is restricted and can be accessed only though certain credentials. After going thourhg the description of the dataset we found the original source (https://www.nga.org/bestpractices/homeland-security/) from where the dataset was curated. We then manually created the dataset by looking up the governor for every state and extracting the necessary information required for analysis purposes.
+**Overall Description:** The dataset found above is restricted and can be accessed only though certain credentials. After going through the description of the dataset, we found the original source (https://www.nga.org/bestpractices/homeland-security/) from where the dataset was curated. We then manually created the dataset by looking up the governor for every state and extracting the necessary information required for analysis purposes.
 
 **Name of Columns:** Office,	Name,	Party,	Date assumed office.
 
-**Column Description:** `Office`, column describes the state `Name` gives the details about the name of the governor and `Party` states the political party to which the governor belongs to and `Date assumed office` states the date on which the governor was elected.
+**Column Description:** `Office`, column describes the state, `Name` gives the details about the name of the governor, `Party` states the political party to which the governor belongs to and `Date assumed office` states the date on which the governor was elected.

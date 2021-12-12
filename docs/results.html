@@ -130,6 +130,7 @@
 <ul>
 <li class="chapter" data-level="7.1" data-path="conclusion.html"><a href="conclusion.html#limitations"><i class="fa fa-check"></i><b>7.1</b> Limitations</a></li>
 <li class="chapter" data-level="7.2" data-path="conclusion.html"><a href="conclusion.html#scope-of-future-work"><i class="fa fa-check"></i><b>7.2</b> Scope of Future Work</a></li>
+<li class="chapter" data-level="7.3" data-path="conclusion.html"><a href="conclusion.html#lessons-learned"><i class="fa fa-check"></i><b>7.3</b> Lessons Learned</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -183,12 +184,12 @@
 <div id="correlation-between-wastage-of-vaccinates-and-the-type-of-local-elected-party-in-a-state" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Correlation between Wastage of Vaccinates, and the type of local elected party in a state</h2>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
-<p>The main motive behind answering this question is to relate the vaccine wastage in a particular state. As the exact details about vaccine wastage has not been released by the government, we try to define a metric which can capture the vaccine wastage in a particular state across the United States. The vaccination dataset available for public usage lists two columns namely “Administered Vaccine doses” and “Distributed Vaccine Doses”. This two columns represent the amount of vaccine distributed to a state on a particular and the amount of vaccine used by the state on a particular date.</p>
-<p>We take the difference between this two values to arrive at an approximate metric which denotes as to how much vaccine was actually given to the public on the given day. To normalize the results along different states, We divide this difference with the population of a particular state. Hence, the final metric is defined as follows:</p>
+<p>The main motive behind answering this question is to relate the vaccine wastage in a particular state. As the exact details about vaccine wastage has not been released by the government, we try to define a metric which can capture the vaccine wastage in a particular state across the United States. The vaccination dataset available for public usage lists two columns namely “Administered Vaccine doses” and “Distributed Vaccine Doses”. These two columns represent the amount of vaccine distributed to a state on a particular date and the amount of vaccine used by the state on a particular date.</p>
+<p>We take the difference between these two values to arrive at an approximate metric which denotes as to how much vaccine was actually given to the public on the given day. To normalize the results along different states, we divide this difference with the population of a particular state. Hence, the final metric is defined as follows:</p>
 <p><span class="math display">\[
 Metric = \frac{( Administered - Distributed )}{State Population}
 \]</span></p>
-<p>The above graph then shows which state has the highest value of the metric faceted along with the political party ruling that state during the vaccination period. As we can see the value of the metric is significantly higher for states with republican ruling party (In the range of 30 - 110). On the other hand the value of the metric is spread out and significantly lower for states with democratic ruling party (In the range of 15 - 70). States ruled by Democratic party governor can be considered to be one of the factors contributing to the lower incidence of vaccine wastage on a particular day.</p>
+<p>The above graph then shows which state has the highest value of the metric faceted along with the political party ruling that state during the vaccination period. As we can see the value of the metric is significantly higher for states with republican ruling party (in the range of 30 - 110). On the other hand, the value of the metric is spread out and significantly lower for states with democratic ruling party (in the range of 15 - 70). States ruled by Democratic party governor can be considered to be one of the factors contributing to the lower incidence of vaccine wastage on a particular day.</p>
 <p>Also, states with higher vaccination density (vaccination per unit population) such as Vermont, Connecticut and Massachusetts have a lower value of metric indicating that the states with higher vaccination density also have vaccine wastage on a lower side.</p>
 
 </div>
