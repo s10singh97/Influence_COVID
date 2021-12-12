@@ -36,3 +36,5 @@ correlation-between-vaccinations-being-administered-and-the-number-of-crimes-in-
 correlation-between-wastage-of-vaccinates-and-the-type-of-local-elected-party-in-a-state
 interactive-component
 conclusion
+limitations
+scope-of-future-work

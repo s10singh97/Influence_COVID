@@ -1,2 +1,9 @@
 # Conclusion
 
+## Limitations
+
+Some datasets contained city-wise information while all of the datasets contained state-wise information. To be consistent while generating conclusive arguments we only decided to work on state-wise information for all datasets. Additionally, since it has only been a year after since the vaccination started, any conclusions that are made now can tend to change once the vaccination process is completed.
+
+## Scope of Future Work
+
+More factors can be taken into consideration to derive a better conclusive argument for the various factors which influenced vaccination. Additionally, analysis on datasets where every data contain demographic details attached with it can also improve the quality of the analysis by giving us an idea of the perception of vaccination among different sections of people.
