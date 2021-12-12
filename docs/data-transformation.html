@@ -191,7 +191,7 @@
 <li>The first few rows of the dataset did not have any data in them and so these rows were discarded.</li>
 <li>The last few rows of the dataset included description of the dataset so the same had to be removed.</li>
 <li>There were some states and column names which had a number in their superscript. We discarded the numbers from such instances and replaced such entries with their actual names.</li>
-<li>Majority of the rows did not have any state value associated with them. For instance, if one row had Alabama associated with it, all the following rows before the name of the next state appeared had the state name missing from it. So we filled these missing values for each row with the appropriate state name.</li>
+<li>Majority of the rows did not have any state value associated with them. For instance, if one row had Alabama associated with it, all the rows following it before the name of the next state appeared had the state name missing from it. So we filled these missing values for each row with the appropriate state name.</li>
 <li>All other columns such as Aggravated Assault, Burglary etc having missing values were simply replaced with 0.</li>
 <li>Each column which had numeric values but was of character type was converted to numeric form.</li>
 <li>On grouping the data by each State, we realized that one row still had a missing State name. On closer analysis, we realized that the cities associated belonged to the state Michigan and so we replaced such missing instances with Michigan.</li>
@@ -201,7 +201,7 @@
 <div id="transformations-for-election-dataset" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Transformations for Election Dataset</h2>
 <ol style="list-style-type: decimal">
-<li>Changed the column names to match with vaccination dataset so as to join them along the common column “region” which denoted the states.</li>
+<li>Changed the column names to match with vaccination dataset so as to join them on the common column “region” which denoted the states.</li>
 <li>Defined a metric based on the vaccination, population and the election dataset and appended its new column in the dataset.</li>
 </ol>
 

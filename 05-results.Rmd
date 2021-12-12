@@ -49,7 +49,7 @@ ggplot(df1, aes(x = Distributed, y = reorder(Location, Distributed), color = Dat
 
 ```
 
-The above plot displays the number of vaccines distributed each month. It seems that the maximum number of vaccines were distributed in October, 2021, followed by Spetember 2021. Additionally, it is important to note that states with huge population like California and Texas received the maximum number of vaccines. Thus, we can conlcude that the vaccines were distributed as per the population of each state. States with higher population received more vaccines than states with less popualation.
+The above plot displays the number of vaccines distributed each month. It seems that the maximum number of vaccines were distributed in October 2021, followed by September 2021. Additionally, it is important to note that states with huge population like California and Texas received the maximum number of vaccines. Thus, we can conclude that the vaccines were distributed as per the population of each state. States with higher population received more vaccines than states with less population.
 
 
 ```{r, fig.height=12, fig.show='hide'}
@@ -84,7 +84,7 @@ ggplot(df3, aes(x = Distributed, y = Administered)) + geom_hex(bins = 20, color 
 
 ```
 
-If we look at a larger picture considering the nationwide vaccine administration and distribution, we can see that the number of vaccines administered is directly proportional to the number of vaccines distributed. Additionally, maximum count where number of vaccines distributed are approximately equal to number of vaccines administered (which is one of the indicator for less vaccine wastage) is only valid in lower ranges of vaccine distributed/administered. While on the higher ranges we can see a considerable deviation wherein number of vaccine distributed differ significantly with the number of vaccine administered.
+If we look at a larger picture considering the nationwide vaccine administration and distribution, we can see that the number of vaccines administered is directly proportional to the number of vaccines distributed. Additionally, maximum count where the number of vaccines distributed are approximately equal to the number of vaccines administered (which is one of the indicators for less vaccine wastage) is only valid in lower ranges of vaccines distributed/administered. With respect to the higher ranges of vaccines distributed/administered, we can see a considerable deviation wherein the number of vaccines distributed differs significantly from the number of vaccines administered.
 
 ```{r, fig.width=14, fig.show='hide'}
 
@@ -99,7 +99,7 @@ ggplot(df2, aes(x = Amount_Administered, y = Type, fill = Type)) + geom_density_
 
 ```
 
-Through the above plot we wanted to understand the inherent distribution pattern of administered vaccines. As it is evident plot, Janssen had almost a perfectly normally distributed pattern but has less number of total vaccines administered than Moderna and Pfizer. Moderna and Pfizer have a more larger span on the number of vaccine administered. Therefore, this gives us a fair idea that more people tended to prefer Pfizer and Moderna over Janssen. Additionally, an initial peak in Janssen signifies that when Moderna and Pfizer were not present in decent amounts people took whatever other alternative was present in the market (i.e. Janssen).
+Through the above plot we wanted to understand the inherent distribution pattern of the administered vaccines. As it is evident from the plot, Janssen had almost a perfect normally distributed pattern but has lesser number of total vaccines administered than Moderna and Pfizer. Moderna and Pfizer have a larger span on the number of vaccine administered. Therefore, this gives us a fair idea that more people tended to prefer Pfizer and Moderna over Janssen. Additionally, an initial peak with respect to Janssen signifies that when Moderna and Pfizer were not present in decent amounts, people took whatever other alternative was present in the market (i.e. Janssen).
 
 ```{r}
 
@@ -143,7 +143,7 @@ ggplot(de3, aes(state = State, fill = freq)) +
 
 The above graph shows the number of different kind of students who were receiving education. There were very few students who remained absent from schools and colleges. This shows that the students are serious about the education and attend the classes regularly. English Learner Teachers and Migratory students were very low in number and are evenly spread across the country. We can also note that fairly very few students attained their education from Local Educational Agency.
 
-Another important thing to look at is the number of English learners. These type of students are predominantly more localized in big states such as California and Texas. Additionally, an interesting feature to note is that the number of homeless students attaining the education are also larger for these states. It is also a good sign that there are more number of homeless students who are working towards receiving their education.
+Another important thing to look at is the number of English learners. These type of students are predominantly more localized in big states such as California and Texas. Additionally, an interesting feature to note is that the number of homeless students attaining education are also larger for these states. It is also a good sign that there are more number of homeless students who are working towards receiving their education.
 
 
 ```{r}
@@ -199,9 +199,9 @@ ggplot(vac_edu, aes(y = density, x = edu_density)) + geom_point(alpha = 0.5) + g
 
 ```
 
-Therefore, from the plot above, we can analyze that as the percentage of educated people increases, the vaccination density also increases. Although the slope of the graph is not large indicating that there is not much dependence, but still it depicts that there will be some improvement in the vaccination rate if more people are educated.
+Therefore, from the plot above, we can analyze that as the percentage of educated people increases, the vaccination density also increases. Although the slope of the graph is not large indicating that there is not much dependence, but it still depicts that there will be some improvement in the vaccination rate if more people are educated.
 
-Some interesting trend to note is that California and Texas both has a very large percentage of educated people but still California had a better Vaccination Density than Texas. While there are some other states as well such as Vermont and Maine where the percentage of educated people are very less but still they have a very high number of vaccine administration density.
+Some interesting trend to note is that California and Texas both have a significant percentage of educated people but still California had a better Vaccination Density than Texas. While there are some other states as well such as Vermont and Maine where the percentage of educated people are very less but still they have very high vaccine administration density.
 
 ```{r, fig.height=10, fig.width=14}
 
@@ -225,11 +225,11 @@ plot(final_plot)
 
 ```
 
-The above plot on the left displays the number of Vaccination Density (vaccines administered/population) in each state and the type of employment that is prominent in that particular state historically. We can observe that the majority of the people who have been administered a vaccine work in Government Enterprises or in Health Care Services. This might be happening because of the certain government policies wherein in front-line healthcare workers were being vaccinated first and thus the majority of the population vaccinated is composed of them.
+The above plot on the left displays the Vaccination Density (vaccines administered/population) in each state and the type of employment that is prominent in that particular state historically. We can observe that the majority of the people who have been administered a vaccine work in Government Enterprises or in Health Care Services. This might be happening because of the certain government policies wherein in front-line healthcare workers were being vaccinated first and thus the majority of the population vaccinated is composed of them.
 
 Additionally, state of New Hampshire, where the dominant profession is Retail Trade also shows a good percentage of people having vaccinated. Some states like Alabama and Mississippi have the lowest vaccination density even when the primary profession of people in those states is a government job. This indicates that government of these states should focus more on the vaccination drive. Nevada being a heavy employer in accommodation services is doing good but can definitely work on it's vaccination program to get more people vaccinated.
 
-The graph on the right indicate the number of states that have a particular kind of maximum employment areas historically. This shows that maximum states in US have been historically employing people in government enterprises. Thus, these states should have been better in terms of vaccination. But as we can see from the graph on the left, people from these area of employment have not been quite enthusiastic about the vaccination drive in some states.
+The graph on the right indicate the number of states that have a particular kind of maximum employment area historically. This shows that maximum states in the US have been historically employing people in government enterprises. Thus, these states should have been better in terms of vaccination. But as we can see from the graph on the left, people from these area of employment have not been quite enthusiastic about the vaccination drive in some states.
 
 ## Correlation between vaccinations being administered and the number of crimes in each state 
 
@@ -390,7 +390,7 @@ c_plot_2 <- patchwork::patchworkGrob(c_plot)
 gridExtra::grid.arrange(c_plot_2, left = "Vaccines Administered/Population", bottom = "Total Crimes", heights=c(16,0.5), widths=c(8,1))
 ```
 
-We try to observe a correlation between the vaccinations administered per unit population and the crimes reported in each states. From the plot above, we observe that states having lower reported crimes (less than 80000) have relatively higher vaccinations administered per unit population compared to the states having higher reported crimes. Few states with extremely low crime rates like Idaho and Alabama have extremely low vaccinations administered per unit population and states like Vermont, Maine and Connecticut have very high vaccinations administered per unit population. Even though California has the highest number of crimes reported, it still has a reasonable amount of vaccinations being administered per unit population. 
+We try to observe a correlation between the vaccinations administered per unit population and the crimes reported in each state. From the plot above, we observe that states having lower reported crimes (less than 80000) have relatively higher vaccinations administered per unit population compared to the states having higher reported crimes. Few states with extremely low crime rates like Idaho and Alabama have extremely low vaccinations administered per unit population and states like Vermont, Maine and Connecticut have very high vaccinations administered per unit population. Even though California has the highest number of crimes reported, it still has a reasonable amount of vaccinations being administered per unit population. 
 
 
 ## Correlation between Wastage of Vaccinates, and the type of local elected party in a state
@@ -453,17 +453,17 @@ vac_gov %>%
   facet_wrap(~Party, ncol = 1, scales = "free") + xlab("Density of Difference between Distributed and Administered Vaccines") + ylab("Sate")
 ```
 
-The main motive behind answering this question is to relate the vaccine wastage in a particular state. As the exact details about vaccine wastage is not released by the government, we try to define a metric which can capture the vaccine wastage in a particular state across united states. The vaccination dataset available for public usage lists two columns namely "Administered Vaccine doses" and "Distributed Vaccine Doses". This two columns represent the amount of vaccine distributed to a state on a particular and the amount of vaccine used by the state on a particular date.
+The main motive behind answering this question is to relate the vaccine wastage in a particular state. As the exact details about vaccine wastage has not been released by the government, we try to define a metric which can capture the vaccine wastage in a particular state across the United States. The vaccination dataset available for public usage lists two columns namely "Administered Vaccine doses" and "Distributed Vaccine Doses". This two columns represent the amount of vaccine distributed to a state on a particular and the amount of vaccine used by the state on a particular date.
 
-We take the difference between this two values to arrive at an approximate metric which denotes as to how much vaccine was actually given to the public on the given day. To normalize the results along different states, We divide this difference with the population of a particular state. Hence the final metric is defined as follows:
+We take the difference between this two values to arrive at an approximate metric which denotes as to how much vaccine was actually given to the public on the given day. To normalize the results along different states, We divide this difference with the population of a particular state. Hence, the final metric is defined as follows:
 
 $$
 Metric = \frac{( Administered - Distributed )}{State Population}
 $$
 
-The above graph then shows which state has the highest value of the metric faceted along with the political party ruling that state during the vaccination period. As we can see the value of the metric is significantly higher for states with republican ruling party (In the range of 30 - 110). On the other hand the value of the metric is spread out and significantly lower for states with democratic ruling party (In the range of 15 - 70). States ruled by Democratic party governor can be considered one of the factor contributing to the lower number of vaccine wastage on a particular day.
+The above graph then shows which state has the highest value of the metric faceted along with the political party ruling that state during the vaccination period. As we can see the value of the metric is significantly higher for states with republican ruling party (In the range of 30 - 110). On the other hand the value of the metric is spread out and significantly lower for states with democratic ruling party (In the range of 15 - 70). States ruled by Democratic party governor can be considered to be one of the factors contributing to the lower incidence of vaccine wastage on a particular day.
 
-Also for states with higher number of successful vaccination per population such as Vermont, Connecticut and Massachusetts have a lower value of metric indication that the states with large number of population vaccination also has vaccine wastage on a lower side. 
+Also, states with higher vaccination density (vaccination per unit population) such as Vermont, Connecticut and Massachusetts have a lower value of metric indicating that the states with higher vaccination density also have vaccine wastage on a lower side. 
 
 ```{r, fig.show = 'hide'}
 vac_gov %>%
