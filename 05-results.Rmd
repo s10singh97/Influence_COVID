@@ -45,7 +45,11 @@ df1 <- vaccine %>%
   summarise_at(vars(-MMWR_week), sum) %>% 
   filter(Location != 'US' & Location %in% state.abb)
   
-ggplot(df1, aes(x = Distributed, y = reorder(Location, Distributed), color = Date)) + geom_point() + ylab("Location")
+ggplot(df1, aes(x = Distributed, y = reorder(Location, Distributed), color = Date)) + geom_point() +  
+  ggtitle("Month-wise Distribution of Vaccine in Each State") +
+  theme(plot.title = element_text(size = "14", hjust = 0.5, face="bold")) + 
+  xlab("Vaccines Distributed") + 
+  ylab("Sate")
 
 ```
 
@@ -59,9 +63,13 @@ df2 <- df1 %>%
   summarise_at(vars(-Date), sum) %>% 
   pivot_longer(cols = c("Administered_Janssen", "Administered_Pfizer", "Administered_Moderna"), names_to = "Type", values_to = "Amount_Administered")
 
-ggplot(df2, aes(x = Amount_Administered, y = reorder(Location, Amount_Administered), color = Type)) + geom_point() + ylab("Location")
-
-
+ggplot(df2, aes(x = Amount_Administered, y = reorder(Location, Amount_Administered), color = Type)) + 
+  geom_point() + 
+  ggtitle("Vaccine Wastage by States and Local Ruling Party") +
+  # theme(plot.title = element_text(hjust = 0.5, size = 12)) +
+  theme(plot.title = element_text(size = "14", hjust = 0.5, face="bold")) + 
+  xlab("Difference Between Distributed and Administered Vaccines Per Unit Population") + 
+  ylab("Sate")
 ```
 
 ```{r, fig.height=12, fig.show='hide'}
@@ -80,7 +88,12 @@ ggplot(df3) +
 
 ```{r}
 
-ggplot(df3, aes(x = Distributed, y = Administered)) + geom_hex(bins = 20, color = 'black') + scale_fill_gradient(low = 'lightyellow', high = 'blue')
+ggplot(df3, aes(x = Distributed, y = Administered)) + geom_hex(bins = 20, color = 'black') + 
+  scale_fill_gradient(low = 'lightyellow', high = 'blue') + 
+  ggtitle("Nationwide Vaccines Administered Vs. Distributed") +
+  theme(plot.title = element_text(size = "14", hjust = 0.5, face="bold")) + 
+  xlab("Administered") + 
+  ylab("Distributed")
 
 ```
 
@@ -89,13 +102,24 @@ If we look at a larger picture considering the nationwide vaccine administration
 ```{r, fig.width=14, fig.show='hide'}
 
 ggplot(df2, aes(x = Amount_Administered, fill = Type)) + 
-  geom_density(alpha = 0.3, adjust = 0.5)
-
+  geom_density(alpha = 0.3, adjust = 0.5) + 
+  ggtitle("Nationwide Vaccines Administered Vs. Distributed") +
+  theme(plot.title = element_text(size = "14", hjust = 0.5, face="bold")) + 
+  xlab("Administered") + 
+  ylab("Distributed")
 ```
 
 ```{r}
 
-ggplot(df2, aes(x = Amount_Administered, y = Type, fill = Type)) + geom_density_ridges(scale = 1, alpha = 0.5) + xlab("Vaccine Administered") + ylab(NULL)
+ggplot(df2, aes(x = Amount_Administered, y = Type, fill = Type)) + 
+  geom_density_ridges(scale = 1, alpha = 0.5) + 
+  xlab("Vaccine Administered") + 
+  ylab(NULL) + 
+  ggtitle("Statistical Distribution of the Three Vaccines") +
+  theme(plot.title = element_text(size = "14", hjust = 0.5, face="bold"))
+  #labs(color = "Type of Vaccine") +
+  #scale_color_manual(labels = c("Janssen", "Moderna", "Pfizer"))
+
 
 ```
 
@@ -119,7 +143,7 @@ pop_de1 <- full_join(de1, p_d, by = "region") %>%
   mutate(pop = as.numeric(pop)) %>% 
   mutate(value = value*100/pop)
 
-state_choropleth(pop_de1, title = "State Education Density (2019-20)", legend = "% of people educated")
+state_choropleth(pop_de1, title = "State Education Density (2019-20)", legend = "Percentage of People Educated")
 
 ```
 
@@ -138,7 +162,10 @@ de3 <- de2 %>%
 ggplot(de3, aes(state = State, fill = freq)) +
   geom_statebins() +
   facet_wrap(~Population, ncol = 2) +
-  scale_fill_viridis(option = "magma", name = "# of People", direction = -1)
+  scale_fill_viridis(option = "magma", name = "# of People", direction = -1) + 
+  ggtitle("Groups of Students Receiving Education") +
+  theme(plot.title = element_text(size = "14", hjust = 0.5, face="bold"))
+
 ```
 
 The above graph shows the number of different kind of students who were receiving education. There were very few students who remained absent from schools and colleges. This shows that the students are serious about the education and attend the classes regularly. English Learner Teachers and Migratory students were very low in number and are evenly spread across the country. We can also note that fairly very few students attained their education from Local Educational Agency.
@@ -195,7 +222,13 @@ vac_edu <- vac_edu %>%
   mutate(edu_density = value*100/pop)
   
 
-ggplot(vac_edu, aes(y = density, x = edu_density)) + geom_point(alpha = 0.5) + geom_text_repel(aes(label = region)) + geom_smooth(method = "lm", se = FALSE) + labs(y = "Vaccination Density", x = "% of educated people")
+ggplot(vac_edu, aes(y = density, x = edu_density)) + 
+  geom_point(alpha = 0.5) + 
+  geom_text_repel(aes(label = region)) + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(y = "Vaccination Density", x = "Percentage of Educated People") +
+  ggtitle("Vaccination Density Vs. Percentage of Educated People") +
+  theme(plot.title = element_text(size = "14", hjust = 0.5, face="bold"))
 
 ```
 
@@ -260,7 +293,11 @@ dfv1 <- dfv %>%
   mutate(Location = fct_reorder(Location,`Total Vaccine Count`, .desc = FALSE)) 
   
 ggplot(dfv1, aes(fill=`Age Groups`,x=Location,y=`Vaccines Administered`)) + geom_bar(position = 'stack', stat="identity") + 
-  coord_flip()
+  coord_flip() + 
+  ggtitle("Vaccine Administered Across States in Three Age Gropus") +
+  theme(plot.title = element_text(size = "14", hjust = 0.5, face="bold")) + 
+  xlab("State") + 
+  ylab("Vaccine Doses Administered") 
 ```
 
 
@@ -389,7 +426,9 @@ cl <- ggplot(a, aes(x = a$Crime_Total, y = reorder(a$State, a$Crime_Total),  col
   geom_point() + 
   ylab("State") + 
   xlab("Total Crime Count") +
-  labs( color = "Dominant Crime")
+  labs( color = "Dominant Crime") + 
+  ggtitle("Total Crimes Across Different States") +
+  theme(plot.title = element_text(size = "14", hjust = 0.5, face="bold"))
 
 cl + scale_color_manual(labels = c("Aggravated Assault", "Larceny Theft"), values = c("#D6604D","#4393C3"))
 ```
@@ -422,7 +461,7 @@ c2 <- ggplot(dc_vac, aes(y = density , x = Crime_Total)) + geom_point(alpha = 0.
 ```{r, fig.height = 8}
 c_plot = c1/c2  
 c_plot_2 <- patchwork::patchworkGrob(c_plot)
-gridExtra::grid.arrange(c_plot_2, left = "Vaccines Administered/Population", bottom = "Total Crimes", heights=c(16,0.5), widths=c(8,1))
+gridExtra::grid.arrange(c_plot_2, left = "Vaccines Administered/Population", bottom = "Total Crimes", heights=c(16,0.5), widths=c(8,1)) 
 ```
 
 We try to observe a correlation between the vaccinations administered per unit population and the crimes reported in each state. From the plot above, we observe that states having lower reported crimes (less than 80000) have relatively higher vaccinations administered per unit population compared to the states having higher reported crimes. Few states with extremely low crime rates like Idaho and Alabama have extremely low vaccinations administered per unit population and states like Vermont, Maine and Connecticut have very high vaccinations administered per unit population. Even though California has the highest number of crimes reported, it still has a reasonable amount of vaccinations being administered per unit population. 
@@ -448,7 +487,11 @@ df1 <- vaccine %>%
   summarise_at(vars(-MMWR_week), sum) %>% 
   filter(Location != 'US' & Location %in% state.abb)
 
-ggplot(df1, aes(x = Wastage_Total, y = reorder(Location, Wastage_Total), color = Date)) + geom_point() + ylab("Location")
+ggplot(df1, aes(x = Wastage_Total, y = reorder(Location, Wastage_Total), color = Date)) + 
+  geom_point() + ggtitle("Vaccine Wastage across various states") +
+  theme(plot.title = element_text(size = "14", hjust = 0.5, face="bold")) + 
+  xlab("Wastage Total") + 
+  ylab("State") 
 ```
 
 ```{r}
@@ -480,12 +523,17 @@ vac_gov <- vac_gov %>%
 ```
 
 
-```{r, fig.height = 8}
+```{r, fig.height = 9}
 vac_gov %>%
   mutate(region = fct_reorder(region, wastage_per_pop, .desc = FALSE)) %>%
   ggplot(aes(x = wastage_per_pop, y = region)) + 
-  geom_point() + 
-  facet_wrap(~Party, ncol = 1, scales = "free") + xlab("Density of Difference between Distributed and Administered Vaccines") + ylab("Sate")
+  geom_point(color = "dark blue") + 
+  facet_wrap(~Party, ncol = 1, scales = "free") + 
+  ggtitle("Vaccine Wastage by States and Local Ruling Party") +
+  # theme(plot.title = element_text(hjust = 0.5, size = 12)) +
+  theme(plot.title = element_text(size = "14", hjust = 0.5, face="bold")) + 
+  xlab("Difference Between Distributed and Administered Vaccines Per Unit Population") + 
+  ylab("Sate")
 ```
 
 The main motive behind answering this question is to relate the vaccine wastage in a particular state. As the exact details about vaccine wastage has not been released by the government, we try to define a metric which can capture the vaccine wastage in a particular state across the United States. The vaccination dataset available for public usage lists two columns namely "Administered Vaccine doses" and "Distributed Vaccine Doses". These two columns represent the amount of vaccine distributed to a state on a particular date and the amount of vaccine used by the state on a particular date.

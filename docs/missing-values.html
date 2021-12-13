@@ -158,22 +158,22 @@
 <div id="missing-value-pattern-plot" class="section level3" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> Missing Value Pattern Plot</h3>
 <p><code>column name on xticks are abbreviated and rotated by 90 degree to avoid overlapping due to large column names</code></p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
 <p>The vaccine dataset consists of 56 unique missing patterns. The most common pattern is when there are missing values in the first column which consists of around 90 percent of all the rows. Also, the dataset consist of a few number of rows with no missing values in them. Further, the last two columns do not contain any missing values in them.</p>
 </div>
 <div id="cleveland-plot" class="section level3" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Cleveland Plot</h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-154-1.png" width="672" /></p>
 <p>This Cleveland Plot indicates the number of missing values as per the <code>Distributed</code> column of each <code>Location</code>. Further, only the top 10 <code>Location</code>’s are selected because there was no significant missing value count for other locations. Since, this column had the maximum number of missing values, it is important to analyze this column before we can finally deduce any conclusions. As indicated by the graph, MH (Marshall Islands) has the highest number of missing values in the <code>Distributed</code> column.</p>
 </div>
 <div id="raster-missing-plot" class="section level3" number="4.1.3">
 <h3><span class="header-section-number">4.1.3</span> Raster Missing Plot</h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-155-1.png" width="672" /></p>
 <p>The above plot indicates that there are considerable number of missing values for <code>Distributed</code> vaccines from Nov 2020 to March 2021 for each location. It is quite surprising that there was no data on vaccines distributed between this time frame. One of the reasons might be due to some regulations wherein different states were not sharing the information on the number of vaccines distributed to the hospitals.</p>
 </div>
 <div id="bar-plot-for-number-of-missing-values-by-date-column" class="section level3" number="4.1.4">
 <h3><span class="header-section-number">4.1.4</span> Bar plot for number of missing values by Date column</h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
 <p>To verify and quantify the raster plot above, we have plotted a bar plot for the <code>Distributed</code> vaccine column against the number of missing values for each date. This plot again confirms the deductions drawn from the raster plot that Nov 2020 to March 2021 timeframe contains maximum missing values for the distributed column. Further, this plot gives us the relative comparison of missing values for each unique date present in the dataset.</p>
 </div>
 </div>
@@ -185,7 +185,7 @@
 <p>For analysis purposes, we consider the employment data from the year 2016 to 2020. We observe that similar number of values are missing for the columns which have certain values missing.</p>
 <div id="missing-value-patterns-when-only-na-is-considered-as-missing-values" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Missing value patterns when only NA is considered as missing values</h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-158-1.png" width="672" /></p>
 <p>To answer the question as to is there any correlation between the vaccination rates and the level of employment in a particular state, we consider the employment data for each state in the United States. The dataset consists of the number of individuals employed in a given sector across all the states. Example of some of the employment categories are Air transportation, Telecommunications, Real Estate etc. We plot the visna style plot to analyze the number of missing value patterns in the dataset.</p>
 <p>The results of the plot indicate that there are only two patterns of missing values in the dataset. Either all the values are present for all columns or the columns containing the employed people in a particular sector for a given year are missing. The second pattern indicates that if the number of people employed in industry ‘X’ is missing for the year 2016, then it is missing for all the years from 2016-2020.</p>
 <p>Now after getting the description of the employment whose values are missing, we notice that only the numbers pertaining to the category “Internet Publishing and Broadcasting” are missing. The reason for this can be found from the footnotes of the dataset, where they mention that after the year 2007, the category “Internet Publishing and Broadcasting” was incorporated into “Other Information Services”.</p>
@@ -193,17 +193,17 @@
 </div>
 <div id="missing-value-patterns-when-both-na-and-dconfidential-are-considered-as-missing-values" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Missing value patterns when both NA and D(confidential) are considered as missing values</h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
 <p>We observe that multiple patterns emerge when the entry “(D)” is considered as an NA value. We can see that the year 2017 has the most number of missing values followed by the year 2020 and so on. A total of 27 different missing patterns can be identified from the dataset.</p>
 </div>
 <div id="job-description-considered-as-dconfidential-for-the-year-2020" class="section level3" number="4.2.3">
 <h3><span class="header-section-number">4.2.3</span> Job Description Considered as “(D):Confidential” for the year 2020</h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-68-1.png" width="960" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-161-1.png" width="960" /></p>
 <p>“Funds, trusts and other financial vehicles” is the job description with maximum number of confidential classified values.</p>
 </div>
 <div id="analysis-of-missing-values-only-under-the-category-d" class="section level3" number="4.2.4">
 <h3><span class="header-section-number">4.2.4</span> Analysis of missing values only under the category “(D)”:</h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
 <p>As clearly visible from graph, we notice that when the data from the years 2016-2020 is taken into consideration, Delaware is the state which has the maximum number of values under the category of “(D): Not shown to avoid disclosure of confidential information”. On the other hand, Michigan is the state with least number of such values.</p>
 <p>Further analysis also yields that the states California and Florida have no such rows containing the value “(D)”.</p>
 </div>
@@ -212,17 +212,17 @@
 <h2><span class="header-section-number">4.3</span> Missing Value Analysis for Crime Dataset</h2>
 <div id="using-heatmap-to-observe-the-missingness-in-the-dataset" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Using Heatmap to observe the missingness in the dataset</h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-168-1.png" width="672" /></p>
 <p>As evident from the heatmap above, the <code>State</code> column has the the most number of missing data points followed by <code>Property Crime Total</code>, <code>Larceny-theft</code>, <code>Arson</code> and <code>Burglary</code>.</p>
 </div>
 <div id="using-heatmap-to-observe-the-missing-values-with-no-missing-state-value" class="section level3" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Using Heatmap to observe the missing values (with no missing State value)</h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
 <p>Using fill, we replaced all missing <code>State</code> values by the respective State name and so the <code>State</code> column has no missing values now. We now observe that <code>Property Crime Total</code> has the most number of missing values followed by <code>Larceny-theft</code>, <code>Arson</code> and <code>Burglary</code>. We also observe that some states like Alabama, Alaska and Arizon (which are the initial observations of the heatmap) have lower number of instances compared to states like Iowa and Kansas (having observation numbers around 2000). Column <code>Population</code> seems to have values on a higher scale compared to other columns while columns like <code>Murder and nonnegligent manslaughter</code> and <code>Arson</code> have values on a lower scale. Based on all the columns, we can observe that the values are not standardized.</p>
 </div>
 <div id="missing-value-patterns-plot-analysis" class="section level3" number="4.3.3">
 <h3><span class="header-section-number">4.3.3</span> Missing Value Patterns Plot Analysis</h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
 <p>From the plots above we can deduce that <code>Property Crime Total</code> and <code>Larceny-theft</code> have roughly the same percentage of missing rows. We can observe that there are 12 unique missing patterns. We also observe that about 90% of the data does not have any missing values in them. <code>Property Crime Total</code> and <code>Larceny-theft</code> contribute towards most of the missing values while other variables have relatively lower missing values.</p>
 </div>
 </div>
