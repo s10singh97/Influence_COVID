@@ -24,6 +24,7 @@ d. [Bureau of Economic Analysis (BEA)](https://apps.bea.gov/regional/downloadzip
 
 e. [History of Local Elected State Party Dataset](https://www.openicpsr.org/openicpsr/project/102000/version/V3/view)
 
+f. [US Census (Population) Dataset](https://www.census.gov/data/tables/2020/dec/2020-apportionment-data.html)
 
 <br><br>
 <em>This repo was initially generated from a bookdown template available here: [https://github.com/jtr13/EDAVtemplate](https://github.com/jtr13/EDAVtemplate).</em>

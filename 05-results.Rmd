@@ -285,7 +285,7 @@ dfv <- df_vaccine_new_1 %>% pivot_longer(!Location,names_to="Age Groups",values_
 
 
 
-```{r, fig.height = 6, fig.width = 10}
+```{r, fig.height = 6, fig.width = 10, fig.show='hide'}
 dfv1 <- dfv %>%
   group_by(Location) %>% 
   mutate(`Total Vaccine Count` = sum(`Vaccines Administered`)) %>%
@@ -301,7 +301,7 @@ ggplot(dfv1, aes(fill=`Age Groups`,x=Location,y=`Vaccines Administered`)) + geom
 ```
 
 
-From the above graph we can infer that California has the highest number of vaccines being administered with the highest being among the 18 years and above age group. On the other hand, Wyoming has the least number of vaccines being administered. From the above plots, another insight that the administration of vaccine among the 18 years and above age group is considerable among all states followed by that of the 12 years and above age group. The share of vaccines being administered among the age group of 65 years and above has been relatively low in all the states. Even though the youth is getting vaccinated at a great pace, the rate of vaccination among the elderly seems to be relatively low.
+<!-- From the above graph we can infer that California has the highest number of vaccines being administered with the highest being among the 18 years and above age group. On the other hand, Wyoming has the least number of vaccines being administered. From the above plots, another insight that the administration of vaccine among the 18 years and above age group is considerable among all states followed by that of the 12 years and above age group. The share of vaccines being administered among the age group of 65 years and above has been relatively low in all the states. Even though the youth is getting vaccinated at a great pace, the rate of vaccination among the elderly seems to be relatively low. -->
 
 ## Correlation between vaccinations being administered and the number of crimes in each state 
 
