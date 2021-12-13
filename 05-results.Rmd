@@ -35,7 +35,7 @@ population <- population[,1:2] %>%
 ## Correlation between Vaccination, level of education, and the type of employment which is dominant in a state
 
 
-```{r, fig.height=10}
+```{r, fig.height=7}
 
 vaccine$Date = as.Date(vaccine$Date, format = "%m/%d/%Y")
 
@@ -203,7 +203,7 @@ Therefore, from the plot above, we can analyze that as the percentage of educate
 
 Some interesting trend to note is that California and Texas both have a significant percentage of educated people but still California had a better Vaccination Density than Texas. While there are some other states as well such as Vermont and Maine where the percentage of educated people are very less but still they have very high vaccine administration density.
 
-```{r, fig.height=10, fig.width=14}
+```{r, fig.height=12, fig.width=14}
 
 dm3 <- dm2 %>% 
   transmute(region = GeoName, Description)
@@ -230,6 +230,41 @@ The above plot on the left displays the Vaccination Density (vaccines administer
 Additionally, state of New Hampshire, where the dominant profession is Retail Trade also shows a good percentage of people having vaccinated. Some states like Alabama and Mississippi have the lowest vaccination density even when the primary profession of people in those states is a government job. This indicates that government of these states should focus more on the vaccination drive. Nevada being a heavy employer in accommodation services is doing good but can definitely work on it's vaccination program to get more people vaccinated.
 
 The graph on the right indicate the number of states that have a particular kind of maximum employment area historically. This shows that maximum states in the US have been historically employing people in government enterprises. Thus, these states should have been better in terms of vaccination. But as we can see from the graph on the left, people from these area of employment have not been quite enthusiastic about the vaccination drive in some states.
+
+```{r}
+df_vaccine <- vaccine %>% 
+  mutate(Date = format(Date, "%m/%y")) %>% 
+  group_by(Location, Date) %>% 
+  summarise_at(vars(-MMWR_week), sum) %>% 
+  filter(Location != 'US' & Location %in% state.abb)
+
+df_vaccine_new <- df_vaccine[c(1,13,14,15)]
+
+df_vaccine_new_1 <- df_vaccine_new %>%
+  group_by(Location) %>% 
+  summarise(`65 years and above`= sum(`Administered_65Plus`),
+            `18 years and above` = sum(`Administered_18Plus`),
+            `12 years and above` = sum(`Administered_12Plus`))
+
+dfv <- df_vaccine_new_1 %>% pivot_longer(!Location,names_to="Age Groups",values_to = "Vaccines Administered")
+
+```
+
+
+
+```{r, fig.height = 6, fig.width = 10}
+dfv1 <- dfv %>%
+  group_by(Location) %>% 
+  mutate(`Total Vaccine Count` = sum(`Vaccines Administered`)) %>%
+  ungroup() %>%
+  mutate(Location = fct_reorder(Location,`Total Vaccine Count`, .desc = FALSE)) 
+  
+ggplot(dfv1, aes(fill=`Age Groups`,x=Location,y=`Vaccines Administered`)) + geom_bar(position = 'stack', stat="identity") + 
+  coord_flip()
+```
+
+
+From the above graph we can infer that California has the highest number of vaccines being administered with the highest being among the 18 years and above age group. On the other hand, Wyoming has the least number of vaccines being administered. From the above plots, another insight that the administration of vaccine among the 18 years and above age group is considerable among all states followed by that of the 12 years and above age group. The share of vaccines being administered among the age group of 65 years and above has been relatively low in all the states. Even though the youth is getting vaccinated at a great pace, the rate of vaccination among the elderly seems to be relatively low.
 
 ## Correlation between vaccinations being administered and the number of crimes in each state 
 
@@ -349,7 +384,7 @@ a <- dd %>%
   mutate(dominant_crime = names(dd)[max_ind+1])
 ```
 
-```{r}
+```{r, fig.height = 6, fig.width = 8}
 cl <- ggplot(a, aes(x = a$Crime_Total, y = reorder(a$State, a$Crime_Total),  color = a$dominant_crime)) + 
   geom_point() + 
   ylab("State") + 
@@ -384,7 +419,7 @@ c2 <- ggplot(dc_vac, aes(y = density , x = Crime_Total)) + geom_point(alpha = 0.
 ```
 
 
-```{r}
+```{r, fig.height = 8}
 c_plot = c1/c2  
 c_plot_2 <- patchwork::patchworkGrob(c_plot)
 gridExtra::grid.arrange(c_plot_2, left = "Vaccines Administered/Population", bottom = "Total Crimes", heights=c(16,0.5), widths=c(8,1))
