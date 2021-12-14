@@ -15,4 +15,4 @@ We will mainly try to answer the following questions:
 
 1. With ongoing vaccination drives, is there some correlation between the vaccination rates and level of education attained by people and the type of employment in that state?
 2. Are the vaccinations being administered lower in states/ counties with higher crime rates? If so, which of these states have the lowest administered vaccines?
-3. Analyzing each state’s distribution and administration of vaccines in order to deduce the performance of political parties with respect to the vaccine wastage crisis. Further, investigate the vaccine administration with respect to various age groups, the type of vaccine administered and the number of doses administered.
+3. Analyzing each state’s distribution and administration of vaccines in order to deduce the performance of political parties with respect to the vaccine wastage crisis. Further, investigate the vaccine administration with respect to the type of vaccine administered and the number of doses administered.

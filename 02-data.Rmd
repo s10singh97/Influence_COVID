@@ -60,4 +60,4 @@ We have used 6 different datsets in this project. Since we wanted to see how dif
 
 **Name of Columns:** Office,	Name,	Party,	Date assumed office.
 
-**Column Description:** `Office`, column describes the state, `Name` gives the details about the name of the governor, `Party` states the political party to which the governor belongs to and `Date assumed office` states the date on which the governor was elected.
+**Column Description:** `Office` column describes the state, `Name` gives the details about the name of the governor, `Party` states the political party to which the governor belongs to and `Date assumed office` states the date on which the governor was elected.
